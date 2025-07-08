@@ -4,7 +4,7 @@ export default function ProductCard({ img, name, description, price }) {
       <a href="#">
         <img className="rounded-t-lg" src={img} alt={`Product ${name} image`} />
       </a>
-      <div className="p-6">
+      <div className="flex flex-col items-start h-60 p-6">
         <a href="#">
           <h5 className="mb-2 text-2xl font-bold tracking-tight font-[EB_Garamond]">
             {name}
@@ -13,7 +13,7 @@ export default function ProductCard({ img, name, description, price }) {
         <p className="mb-3 font-normal text-[var(--foreground)]">
           {description}
         </p>
-        <button className="px-3 py-2 text-sm font-medium text-center text-[var(--secondary-bg)] bg-[var(--green)] rounded-full cursor-pointer">
+        <button className="mt-auto px-3 py-2 text-sm font-medium text-center text-[var(--secondary-bg)] bg-[var(--green)] rounded-full cursor-pointer">
           Order Now
         </button>
       </div>
