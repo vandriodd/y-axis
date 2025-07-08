@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
+
+
 :root {
   --primary-bg: #f8f5f0;
   --secondary-bg: #fcfcfd;
@@ -24,7 +26,7 @@
 }
 
 .heading {
-  @apply flex flex-col items-center gap-5 [&>h3]:text-[var(--gold)] [&>h2]:text-[var(--foreground)] [&>h2]:font-[EB_Garamond] [&>h2]:text-[2rem] [&>h2]:font-bold [&>h3]:uppercase [&>h3]:tracking-[0.3em] mb-10 text-center;
+  @apply flex flex-col items-center gap-5 [&>h3]:text-[var(--gold)] [&>h2]:text-[var(--foreground)] [&>h2]:font-[EB_Garamond] [&>h2]:text-3xl [&>h2]:font-bold [&>h3]:uppercase [&>h3]:tracking-[0.3em] mb-10 text-center;
 }
 
 .primary-heading {
@@ -32,7 +34,7 @@
 }
 
 .title {
-  @apply text-[2rem] font-bold font-[EB_Garamond];
+  @apply text-3xl font-bold font-[EB_Garamond];
 }
 
 .subtitle {

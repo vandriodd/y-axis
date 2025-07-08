@@ -313,7 +313,7 @@ export default function App() {
 
           <section
             id="become-a-client"
-            className="bg-[var(--secondary-bg)] flex flex-col justify-center items-center gap-10 px-36 py-20"
+            className="bg-[var(--secondary-bg)] flex flex-col justify-center items-center gap-10 px-12 py-20 lg:px-36"
           >
             <header className="heading">
               <h3>Become a client</h3>
@@ -322,7 +322,7 @@ export default function App() {
             <div className="flex flex-col items-center gap-5">
               <img src="become-a-client.png" alt="become-a-client" />
 
-              <p className="font-[EB_Garamond] text-[2rem] text-center">
+              <p className="font-[EB_Garamond] text-2xl md:text-3xl text-center">
                 Registration gives you full access to our collections, tailored
                 service, and limited releases.
               </p>
