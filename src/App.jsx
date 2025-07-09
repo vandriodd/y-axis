@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Navbar from "./components/navbar";
 import ProductCard from "./components/product-card";
@@ -8,6 +8,7 @@ import Footer from "./components/footer";
 import TestimonialCard from "./components/testimonial-card";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/effect-coverflow";
 
 const products = [
   {
@@ -128,7 +129,7 @@ const reasons = [
   },
 ];
 
-export default function App() {
+export default function Landing() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -147,8 +148,8 @@ export default function App() {
     };
   }, []);
 
-  return (
-    <>
+    return (
+      <>
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 mb-16 ${
           scrolled ? "shadow-md bg-[var(--secondary-bg)]" : ""
@@ -176,24 +177,24 @@ export default function App() {
       <main className="flex flex-col items-center gap-20 min-h-screen [&>section]:scroll-mt-24 [&>section]:w-full">
           <section
           id="about-us"
-            className="bg-[var(--secondary-bg)] py-12 px-6 md:py-20 md:px-36"
+            className="bg-bg-secondary py-12 px-6 md:py-20 md:px-36"
           >
             <div className="flex flex-col xl:flex-row items-center gap-16 max-w-6xl mx-auto">
               <img src="/about-us-img.png" alt="about-us-img" />
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col">
                 <header className="heading">
                   <h3>Who we are</h3>
                   <h2>About Us</h2>
                 </header>
 
                 <div className="flex flex-col items-center gap-2">
-                  <p className="text-center font-['EB_Garamond'] text-[1.5rem]">
+                  <p className="text-center font-garamond text-2xl">
                     "We don't just design eyewear — we shape how people see and
                     are seen. Every piece carries intention, and every detail
                     speaks quietly of quality."
                   </p>
 
-                  <small className="flex flex-col items-center [&>span]:text-[var(--gold)] [&>span]:uppercase mt-4">
+                  <small className="flex flex-col items-center [&>span]:text-gold [&>span]:uppercase mt-4">
                     Mateo L. Ortega
                     <span>Founder & Creative director</span>
                   </small>
@@ -243,7 +244,7 @@ export default function App() {
 
           <section
             id="reasons"
-            className="flex flex-col w-full lg:flex-row items-center px-12 py-20 xl:px-36 bg-[var(--secondary-bg)] gap-12 justify-center"
+            className="flex flex-col w-full lg:flex-row items-center px-12 py-20 xl:px-36 bg-bg-secondary gap-12 justify-center"
           >
             <div className="max-w-lg">
               <header className="heading">
@@ -260,16 +261,16 @@ export default function App() {
                   {reasons.map((reason, i) => (
                     <li
                       key={`${reason.title}-${i}`}
-                      className="flex flex-row gap-8 py-4 border-b-[var(--gold)] border-b-[1px]"
+                      className="flex flex-row gap-8 py-4 border-b-gold border-b-[1px]"
                     >
-                      <span className="text-[var(--gold)]">0{i + 1}</span>
+                      <span className="text-gold">0{i + 1}</span>
                       <p>{reason.title}</p>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <img src="/reasons.png" alt="reasons" className="max-w-md" />
+            <img src="/reasons.png" alt="reasons" className="w-sm max-w-md md:w-full" />
           </section>
 
           <section id="testimonials" className="px-4">
@@ -277,57 +278,73 @@ export default function App() {
               <h3>Testimonials</h3>
               <h2>What our clients say?</h2>
             </header>
-            <div className="w-full relative max-w-7xl mx-auto px-16 flex flex-row justify-center">
-              <div className="swiper-button-prev"></div>
-              <Swiper
-                modules={[Navigation]}
-                slidesPerView={3}
-                spaceBetween={20}
-                navigation={{
-                  nextEl: ".swiper-button-next",
-                  prevEl: ".swiper-button-prev",
-                }}
-                loop={true}
-                className="mx-auto w-full max-w-7xl px-8"
-                breakpoints={{
-                  100: {
-                    slidesPerView: 1,
-                  },
-                  768: {
-                    slidesPerView: 2,
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                  },
-                }}
-              >
-                {testimonials.map((testimonial, index) => (
-                  <SwiperSlide key={testimonial.name + index} className="[&>article]:mx-auto">
-                    <TestimonialCard {...testimonial} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              <div className="swiper-button-next"></div>
+
+            <div className="w-full relative max-w-7xl mx-auto px-2 md:px-16 lg:px-20">
+              <div className="absolute top-0 bottom-0 left-0 md:left-12 w-[15%] z-10 pointer-events-none bg-gradient-to-r from-bg-primary via-bg-primary to-transparent"></div>
+
+              <div className="absolute top-0 bottom-0 right-0 md:right-12 w-[15%] z-10 pointer-events-none bg-gradient-to-l from-bg-primary via-bg-primary to-transparent"></div>
+
+              <div className="relative flex flex-row justify-center">
+                <div className="!w-0 md:w-auto swiper-button-prev z-20 md:flex md:left-1 lg:left-4"></div>
+                <Swiper
+                  className="mx-auto w-full max-w-7xl px-4 md:px-8"
+                  modules={[Navigation, EffectCoverflow]}
+                  slidesPerView="auto"
+                  centeredSlides={true}
+                  loop={true}
+                  navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  }}
+                  effect="coverflow"
+                  coverflowEffect={{
+                    rotate: 0,
+                    stretch: 80,
+                    depth: 200,
+                    modifier: 1,
+                    slideShadows: false,
+                  }}
+                  breakpoints={{
+                    100: {
+                      slidesPerView: 1,
+                    },
+                    768: {
+                      slidesPerView: 2,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                    },
+                  }}
+                >
+                  {testimonials.map((testimonial, index) => (
+                    <SwiperSlide key={testimonial.name + index} className="[&>article]:mx-auto">
+                      <TestimonialCard {...testimonial} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                <div className="!w-0 md:w-auto swiper-button-next z-20 md:flex md:right-1 lg:right-4"></div>
+              </div>
             </div>
           </section>
 
           <section
             id="become-a-client"
-            className="bg-[var(--secondary-bg)] flex flex-col justify-center items-center gap-10 px-12 py-20 lg:px-36"
+            className="bg-bg-secondary flex flex-col justify-center items-center  px-12 py-20 lg:px-36"
           >
             <header className="heading">
               <h3>Become a client</h3>
               <h2>Start seeing differently</h2>
             </header>
+
             <div className="flex flex-col items-center gap-5">
               <img src="become-a-client.png" alt="become-a-client" />
 
-              <p className="font-[EB_Garamond] text-2xl md:text-3xl text-center">
+              <p className="font-garamond text-2xl md:text-3xl text-center">
                 Registration gives you full access to our collections, tailored
                 service, and limited releases.
               </p>
 
-              <button className="flex items-center gap-2 px-10 py-2 rounded-full bg-[var(--green)] text-white cursor-pointer">
+              <button className="flex items-center gap-2 px-10 py-2 rounded-full bg-green text-white cursor-pointer duration-300 hover:bg-accent-foreground/80 transition-colors">
                 Join Now
                 <Icon icon="solar:arrow-right-up-linear" />
               </button>
@@ -337,5 +354,5 @@ export default function App() {
 
       <Footer />
     </>
-  );
+    )
 }

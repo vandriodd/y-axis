@@ -1,6 +1,6 @@
 export default function ProductCard({ img, name, description, price }) {
   return (
-    <article className="max-w-sm bg-[var(--secondary-bg)] border-[var(--gray)] border-[0.5px] rounded-2xl">
+    <article className="max-w-sm bg-bg-secondary border-gray border-[0.5px] rounded-2xl">
       <a href="#">
         <img className="rounded-t-lg" src={img} alt={`Product ${name} image`} />
       </a>
@@ -10,10 +10,10 @@ export default function ProductCard({ img, name, description, price }) {
             {name}
           </h5>
         </a>
-        <p className="mb-3 font-normal text-[var(--foreground)]">
+        <p className="mb-3 font-normal text-foreground">
           {description}
         </p>
-        <button className="mt-auto px-3 py-2 text-sm font-medium text-center text-[var(--secondary-bg)] bg-[var(--green)] rounded-full cursor-pointer">
+        <button className="mt-auto px-3 py-2 text-sm font-medium text-center text-bg-secondary bg-green rounded-full cursor-pointer hover:bg-accent-foreground/80 transition-colors">
           Order Now
         </button>
       </div>

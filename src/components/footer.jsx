@@ -25,10 +25,10 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--secondary-bg)] text-[var(--foreground)] py-12 px-6 md:px-12 lg:px-36 border-t-[var(--gray)] border-t-[1px]">
+    <footer className="bg-bg-secondary text-foreground py-12 px-6 md:px-12 lg:px-36 border-t-gray border-t-[1px]">
       <div className="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
         <div className="w-full md:max-w-md items-center text-center md:text-left">
-          <h2 className="text-3xl font-bold font-[EB_Garamond] text-[var(--green)] mb-2">
+          <h2 className="text-3xl font-bold font-[EB_Garamond] text-green mb-2">
             Y-axis
           </h2>
           <p className="text-lg">Everything starts with vision.</p>
@@ -37,14 +37,14 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row gap-4 items-center text-center md:text-left [&>a]:whitespace-nowrap [&>address]:whitespace-nowrap">
           <a
             href="mailto:contact@yaxis.com"
-            className="hover:text-[var(--gold)] transition-colors lg:border-r-[var(--gold)] lg:border-r-[1px] pr-4"
+            className="hover:text-green transition-colors lg:border-r-gold lg:border-r-[1px] pr-4"
           >
             contact@yaxis.com
           </a>
 
           <a
             href="tel:+23089078908"
-            className="hover:text-[var(--gold)] transition-colors lg:border-r-[var(--gold)] lg:border-r-[1px] pr-4"
+            className="hover:text-green transition-colors lg:border-r-gold lg:border-r-[1px] pr-4"
           >
             +230 8907 8908
           </a>
@@ -60,7 +60,7 @@ export default function Footer() {
               key={`${social.name}-${i}`}
               href={social.href}
               aria-label={social.name}
-              className="text-2xl text-[var(--green)] hover:translate-y-[-2px] transition-transform"
+              className="text-2xl text-green hover:translate-y-[-2px] transition-transform"
             >
               <Icon icon={social.icon} />
             </a>
