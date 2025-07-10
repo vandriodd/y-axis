@@ -6,6 +6,7 @@ import NotFound from "./pages/404";
 import { useContext } from "react";
 import { AuthContext } from "./providers/context";
 import ProtectedRoutes from "./components/protected-routes";
+import ProductPage from './pages/Product';
 
 export default function App() {
   const context = useContext(AuthContext);
@@ -24,7 +25,13 @@ export default function App() {
           <ProtectedRoutes>
             <Switch>
               <Route path="/home" component={Home} />
+              <Route path="/product/:id" component={ProductPage} />
+
+              <Route>
+                <NotFound />
+              </Route>
             </Switch>
+
           </ProtectedRoutes>
         </Route>
 

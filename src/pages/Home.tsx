@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { Button } from '@/components/ui/button';
 import PageLayout from "../components/layout";
 import ProductCard from "../components/product-card";
-import { Button } from '@/components/ui/button';
 
 const productsData = [
   {
     id: "1",
     name: "Aviator Classic",
+    description: "Glasses with aviator frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$129.99",
     img: "/products/glasses1.jpg",
     rating: 4.8,
@@ -16,6 +17,7 @@ const productsData = [
   {
     id: "2",
     name: "Roundframe Gold",
+    description: "Glasses with round frame and gold color, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$149.99",
     img: "/products/glasses2.jpg",
     rating: 4.6,
@@ -25,6 +27,7 @@ const productsData = [
   {
     id: "3",
     name: "Rectangle Modern",
+    description: "Glasses with rectangle frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$119.99",
     img: "/products/glasses3.jpg",
     rating: 4.7,
@@ -34,6 +37,7 @@ const productsData = [
   {
     id: "4",
     name: "Clubmaster Elite",
+    description: "Glasses with clubmaster frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$159.99",
     img: "/products/glasses4.jpg",
     rating: 4.9,
@@ -43,6 +47,7 @@ const productsData = [
   {
     id: "5",
     name: "Wayfarer Pro",
+    description: "Glasses with wayfarer frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$139.99",
     img: "/products/glasses5.jpg",
     rating: 4.5,
@@ -51,6 +56,7 @@ const productsData = [
   {
     id: "6",
     name: "Cat-Eye Vintage",
+    description: "Glasses with cat-eye frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$129.99",
     img: "/products/glasses6.jpg",
     rating: 4.3,
@@ -59,6 +65,7 @@ const productsData = [
   {
     id: "7",
     name: "Oval Titanium",
+    description: "Glasses with oval frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$179.99",
     img: "/products/glasses7.jpg",
     rating: 4.7,
@@ -67,6 +74,7 @@ const productsData = [
   {
     id: "8",
     name: "Square Modern",
+    description: "Glasses with square frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$145.99",
     img: "/products/glasses8.jpg",
     rating: 4.4,
@@ -75,6 +83,7 @@ const productsData = [
   {
     id: "9",
     name: "Hexagon Wire",
+    description: "Glasses with hexagon frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$159.99",
     img: "/products/glasses9.jpg",
     rating: 4.6,
@@ -83,6 +92,7 @@ const productsData = [
   {
     id: "10",
     name: "Butterfly Elegant",
+    description: "Glasses with butterfly frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$169.99",
     img: "/products/glasses10.jpg",
     rating: 4.8,
@@ -91,6 +101,7 @@ const productsData = [
   {
     id: "11",
     name: "Retro Bold",
+    description: "Glasses with retro frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$149.99",
     img: "/products/glasses11.jpg",
     rating: 4.5,
@@ -99,6 +110,7 @@ const productsData = [
   {
     id: "12",
     name: "Minimalist Thin",
+    description: "Glasses with minimalist frame and modern design, made of titanium. The perfect combination of style and comfort. You will love it!",
     price: "$129.99",
     img: "/products/glasses12.jpg",
     rating: 4.3,

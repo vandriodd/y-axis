@@ -25,7 +25,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-bg-secondary text-foreground py-12 px-6 md:px-12 lg:px-36 border-t-gray border-t-[1px]">
+    <footer className="bg-bg-secondary text-foreground py-12 px-6 md:px-12 lg:px-36 border-t-gray border-t-[1px] bottom-0 left-0 right-0">
       <div className="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
         <div className="w-full md:max-w-md items-center text-center md:text-left">
           <h2 className="text-3xl font-bold font-[EB_Garamond] text-green mb-2">

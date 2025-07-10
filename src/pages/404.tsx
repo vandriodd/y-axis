@@ -1,5 +1,6 @@
 import { useLocation } from 'wouter';
 import { Icon } from '@iconify/react';
+import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
   const [, setLocation] = useLocation();
@@ -21,21 +22,14 @@ export default function NotFound() {
       </header>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-        <button
-          onClick={() => setLocation('/home')}
-          className="flex items-center justify-center gap-2 bg-green text-white px-6 py-3 rounded-full hover:bg-opacity-90 transition-all"
-        >
+        <Button onClick={() => setLocation('/home')}>
           <Icon icon="mdi:home" />
           Go to Homepage
-        </button>
-
-        <button
-          onClick={() => window.history.back()}
-          className="flex items-center justify-center gap-2 bg-transparent border-2 border-gold text-gold px-6 py-3 rounded-full hover:bg-gold/5 transition-all"
-        >
+        </Button>
+        <Button onClick={() => window.history.back()} variant="outline" className="bg-bg-primary border-1 border-gold text-gold hover:bg-gold hover:text-white transition-all">
           <Icon icon="mdi:arrow-left" />
           Go Back
-        </button>
+        </Button>
       </div>
     </div>
   );

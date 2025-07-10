@@ -1,21 +1,25 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { type JSX, type MouseEvent } from "react";
 import { useLocation } from "wouter";
-import type { JSX, MouseEvent } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { calculateStars } from "@/lib/utils";
 
 interface ProductCardProps {
   img: string;
   name: string;
+  description: string;
   price: string;
   id: string | number;
   rating: number;
   reviews: number;
 }
 
-export default function ProductCard({ img, name, price, id, rating, reviews }: ProductCardProps) {
+export default function ProductCard({ img, name, description, price, id, rating, reviews }: ProductCardProps) {
   const [, setLocation] = useLocation();
 
   const handleClick = (): void => {
     setLocation(`/product/${id}`);
+
+    localStorage.setItem("product", JSON.stringify({ img, name, description, price, id, rating, reviews }));
   };
 
   const handleAddToCart = (e: MouseEvent): void => {
@@ -24,42 +28,35 @@ export default function ProductCard({ img, name, price, id, rating, reviews }: P
   };
 
   const renderStars = (): JSX.Element[] => {
-    const stars: JSX.Element[] = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
+    const starTypes = calculateStars(rating);
 
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(
-        <Icon
-          key={`star-full-${i}`}
-          icon="solar:star-bold"
-          className="text-gold"
-        />
-      );
-    }
-
-    if (hasHalfStar) {
-      stars.push(
-        <Icon
-          key="star-half"
-          icon="solar:star-half-bold"
-          className="text-gold"
-        />
-      );
-    }
-
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(
-        <Icon
-          key={`star-empty-${i}`}
-          icon="solar:star-linear"
-          className="text-gold"
-        />
-      );
-    }
-
-    return stars;
+    return starTypes.map((type, index) => {
+      if (type === 'full') {
+        return (
+          <Icon
+            key={`star-full-${index}`}
+            icon="solar:star-bold"
+            className="text-gold"
+          />
+        );
+      } else if (type === 'half') {
+        return (
+          <Icon
+            key="star-half"
+            icon="solar:star-half-bold"
+            className="text-gold"
+          />
+        );
+      } else {
+        return (
+          <Icon
+            key={`star-empty-${index}`}
+            icon="solar:star-linear"
+            className="text-gold"
+          />
+        );
+      }
+    });
   };
 
   return (
