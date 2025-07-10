@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Navigation, EffectCoverflow } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Navbar from "../navbar";
-import ProductCard from "../product-card";
-import Footer from "../footer";
-import TestimonialCard from "../testimonial-card";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-coverflow";
+import Navbar from "../components/navbar";
+import ProductLandingCard from "../components/product-landing-card";
+import Footer from "../components/footer";
+import TestimonialCard from "../components/testimonial-card";
+import { Carousel, CarouselItem, CarouselContent, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
+import { Button } from '@/components/ui/button';
 
 const products = [
   {
@@ -209,36 +206,22 @@ export default function Landing() {
               <h2>Our exclusive products</h2>
             </header>
             <div className="w-full relative max-w-6xl mx-auto px-16 flex flex-row justify-center">
-              <div className="swiper-button-prev"></div>
-              <Swiper
-                modules={[Navigation]}
-                slidesPerView={3}
-                spaceBetween={20}
-                navigation={{
-                  nextEl: ".swiper-button-next",
-                  prevEl: ".swiper-button-prev",
+              <Carousel
+                opts={{
+                  align: "start",
                 }}
-                loop={true}
-                className="mx-auto w-full max-w-6xl px-8"
-                breakpoints={{
-                  100: {
-                    slidesPerView: 1,
-                  },
-                  768: {
-                    slidesPerView: 2,
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                  },
-                }}
+                className="w-full max-w-6xl"
               >
-                {products.map((product, index) => (
-                  <SwiperSlide key={product.name + index} className="[&>article]:mx-auto">
-                    <ProductCard {...product} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              <div className="swiper-button-next"></div>
+                <CarouselContent>
+                  {products.map((product, index) => (
+                    <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={product.name + index}>
+                      <ProductLandingCard {...product} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
             </div>
           </section>
 
@@ -263,67 +246,39 @@ export default function Landing() {
                       key={`${reason.title}-${i}`}
                       className="flex flex-row gap-8 py-4 border-b-gold border-b-[1px]"
                     >
-                      <span className="text-gold">0{i + 1}</span>
+                      <span className="text-gold font-garamond font-bold">0{i + 1}</span>
                       <p>{reason.title}</p>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <img src="/reasons.png" alt="reasons" className="w-sm max-w-md md:w-full" />
+            <img src="/img-1.jpg" alt="A photo of a shelf with eyewear" className="w-sm max-w-md md:w-full" />
           </section>
 
-          <section id="testimonials" className="px-4">
+          <section id="testimonials" className="px-4 py-16 relative overflow-hidden">
             <header className="heading">
               <h3>Testimonials</h3>
               <h2>What our clients say?</h2>
             </header>
 
-            <div className="w-full relative max-w-7xl mx-auto px-2 md:px-16 lg:px-20">
-              <div className="absolute top-0 bottom-0 left-0 md:left-12 w-[15%] z-10 pointer-events-none bg-gradient-to-r from-bg-primary via-bg-primary to-transparent"></div>
-
-              <div className="absolute top-0 bottom-0 right-0 md:right-12 w-[15%] z-10 pointer-events-none bg-gradient-to-l from-bg-primary via-bg-primary to-transparent"></div>
-
-              <div className="relative flex flex-row justify-center">
-                <div className="!w-0 md:w-auto swiper-button-prev z-20 md:flex md:left-1 lg:left-4"></div>
-                <Swiper
-                  className="mx-auto w-full max-w-7xl px-4 md:px-8"
-                  modules={[Navigation, EffectCoverflow]}
-                  slidesPerView="auto"
-                  centeredSlides={true}
-                  loop={true}
-                  navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                  }}
-                  effect="coverflow"
-                  coverflowEffect={{
-                    rotate: 0,
-                    stretch: 80,
-                    depth: 200,
-                    modifier: 1,
-                    slideShadows: false,
-                  }}
-                  breakpoints={{
-                    100: {
-                      slidesPerView: 1,
-                    },
-                    768: {
-                      slidesPerView: 2,
-                    },
-                    1024: {
-                      slidesPerView: 3,
-                    },
-                  }}
-                >
+            <div className="w-full relative max-w-6xl mx-auto px-16 flex flex-row justify-center">
+              <Carousel
+                opts={{
+                  align: "start",
+                }}
+                className="w-full max-w-6xl"
+              >
+                <CarouselContent>
                   {testimonials.map((testimonial, index) => (
-                    <SwiperSlide key={testimonial.name + index} className="[&>article]:mx-auto">
+                    <CarouselItem className="basis-full" key={testimonial.name + index}>
                       <TestimonialCard {...testimonial} />
-                    </SwiperSlide>
+                    </CarouselItem>
                   ))}
-                </Swiper>
-                <div className="!w-0 md:w-auto swiper-button-next z-20 md:flex md:right-1 lg:right-4"></div>
-              </div>
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
             </div>
           </section>
 
@@ -337,17 +292,17 @@ export default function Landing() {
             </header>
 
             <div className="flex flex-col items-center gap-5">
-              <img src="become-a-client.png" alt="become-a-client" />
+              <img className="w-full h-96 object-cover border-[0.5px] border-gold/50" src="login.jpg" alt="become-a-client" />
 
               <p className="font-garamond text-2xl md:text-3xl text-center">
                 Registration gives you full access to our collections, tailored
                 service, and limited releases.
               </p>
 
-              <button className="flex items-center gap-2 px-10 py-2 rounded-full bg-green text-white cursor-pointer duration-300 hover:bg-accent-foreground/80 transition-colors">
+              <Button className="px-10">
                 Join Now
                 <Icon icon="solar:arrow-right-up-linear" />
-              </button>
+              </Button>
             </div>
           </section>
       </main>

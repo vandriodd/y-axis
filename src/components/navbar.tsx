@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { useLocation } from 'wouter';
 import { Icon } from "@iconify/react/dist/iconify.js";
 
@@ -7,7 +7,7 @@ export default function Navbar() {
   const [, setIsLoggedIn] = useState(false);
   const [, setLocation] = useLocation();
 
-  const toggleMenu = () => {
+  const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
 
     if (!isMenuOpen) {
@@ -17,12 +17,12 @@ export default function Navbar() {
     }
   };
 
-  const closeMenu = () => {
+  const closeMenu = (): void => {
     setIsMenuOpen(false);
     document.body.style.overflow = "";
   };
 
-  const handleLogIn = () => {
+  const handleLogIn = (): void => {
     setLocation("/login");
     setIsLoggedIn(true);
   }

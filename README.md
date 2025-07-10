@@ -21,6 +21,7 @@ Y-Axis is a premium eyewear brand website showcasing luxury, handcrafted eyewear
 - **React** - Frontend library for building the user interface
 - **Vite** - Next-generation frontend tooling for faster development
 - **Tailwind CSS** - Utility-first CSS framework for styling
+- **Shadcn UI** - Modern React component library
 - **Swiper** - Modern mobile touch slider for product and testimonial carousels
 - **Wouter** - Tiny router for modern web applications
 - **Iconify** - Comprehensive icon library integration
