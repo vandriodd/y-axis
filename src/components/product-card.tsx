@@ -2,8 +2,10 @@ import { type JSX, type MouseEvent } from "react";
 import { useLocation } from "wouter";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { calculateStars } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 interface ProductCardProps {
+  isLanding?: boolean;
   img: string;
   name: string;
   description: string;
@@ -13,13 +15,25 @@ interface ProductCardProps {
   reviews: number;
 }
 
-export default function ProductCard({ img, name, description, price, id, rating, reviews }: ProductCardProps) {
+export default function ProductCard({
+  isLanding,
+  img,
+  name,
+  description,
+  price,
+  id,
+  rating,
+  reviews,
+}: ProductCardProps) {
   const [, setLocation] = useLocation();
 
   const handleClick = (): void => {
     setLocation(`/product/${id}`);
 
-    localStorage.setItem("product", JSON.stringify({ img, name, description, price, id, rating, reviews }));
+    localStorage.setItem(
+      "product",
+      JSON.stringify({ img, name, description, price, id, rating, reviews })
+    );
   };
 
   const handleAddToCart = (e: MouseEvent): void => {
@@ -31,7 +45,7 @@ export default function ProductCard({ img, name, description, price, id, rating,
     const starTypes = calculateStars(rating);
 
     return starTypes.map((type, index) => {
-      if (type === 'full') {
+      if (type === "full") {
         return (
           <Icon
             key={`star-full-${index}`}
@@ -39,7 +53,7 @@ export default function ProductCard({ img, name, description, price, id, rating,
             className="text-gold"
           />
         );
-      } else if (type === 'half') {
+      } else if (type === "half") {
         return (
           <Icon
             key="star-half"
@@ -62,8 +76,10 @@ export default function ProductCard({ img, name, description, price, id, rating,
   return (
     <div className="flex flex-col group">
       <div
-        className="relative overflow-hidden cursor-pointer aspect-[3/4] mb-4"
-        onClick={handleClick}
+        className={`relative overflow-hidden aspect-[3/4] mb-4 ${
+          isLanding ? "cursor-default" : "cursor-pointer"
+        }`}
+        onClick={!isLanding ? handleClick : undefined}
       >
         <img
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -76,25 +92,34 @@ export default function ProductCard({ img, name, description, price, id, rating,
 
       <div className="px-1 py-2">
         <div className="flex justify-between items-center mb-3">
-          <h5 className="text-lg font-medium font-garamond tracking-wide">{name}</h5>
-          <span className="text-gold font-medium">{price}</span>
+          <h5 className="text-lg font-medium font-garamond tracking-wide">
+            {name}
+          </h5>
+          {!isLanding && <span className="text-gold font-medium">{price}</span>}
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <div className="flex mr-1 space-x-0.5">
-              {renderStars()}
-            </div>
+            <div className="flex mr-1 space-x-0.5">{renderStars()}</div>
             <span className="text-sm text-gray-400 ml-1">({reviews})</span>
           </div>
 
-          <button
-            onClick={handleAddToCart}
-            className="p-2 rounded-full text-gold border border-gold/30 hover:bg-gold/5 transition-colors flex items-center justify-center cursor-pointer"
-            aria-label="Add to cart"
-          >
-            <Icon icon="solar:cart-plus-bold" className="w-4 h-4" />
-          </button>
+          {isLanding ? (
+            <Button
+              variant="ghost"
+              className="px-4 text-green hover:text-green/80 hover:bg-green/10 transition-all duration-300"
+            >
+              Order Now
+            </Button>
+          ) : (
+            <button
+              onClick={handleAddToCart}
+              className="p-2 rounded-full text-gold border border-gold/30 hover:bg-gold/5 transition-colors flex items-center justify-center cursor-pointer"
+              aria-label="Add to cart"
+            >
+              <Icon icon="solar:cart-plus-bold" className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
     </div>

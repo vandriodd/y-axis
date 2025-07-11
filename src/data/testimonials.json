@@ -1,0 +1,50 @@
+[
+  {
+    "img": "/arjun-mehra.png",
+    "name": "Arjun Mehra",
+    "role": "Founder",
+    "company": "Form Supply",
+    "quote":
+      "We curate only a handful of eyewear lines, and this one immediately stood out. The build quality, the restraint in design, and the consistency in craftsmanship made it an easy decision. Our clients notice the difference — and so do we."
+  },
+  {
+    "img": "/ethan-rowe.png",
+    "name": "Ethan Rowe",
+    "role": "Retail director",
+    "company": "Mod&Co",
+    "quote":
+      "What drew us in was the philosophy behind the product: quiet luxury, built with intention. Our customers value design with depth — and that's exactly what these frames deliver. It's not just eyewear; it's an experience we're proud to offer."
+  },
+  {
+    "img": "/elise-van-den-berg.png",
+    "name": "Élise Van den Berg",
+    "role": "Buyer & Curator",
+    "company": "Nord Optique",
+    "quote":
+      "We're very selective with what we bring into the studio, and this collection checked every box: elegant construction, timeless proportions, and a sense of calm confidence. The response from our clientele has been immediate."
+  },
+  {
+    "img": "/arjun-mehra.png",
+    "name": "Arjun Mehra",
+    "role": "Founder",
+    "company": "Form Supply",
+    "quote":
+      "We curate only a handful of eyewear lines, and this one immediately stood out. The build quality, the restraint in design, and the consistency in craftsmanship made it an easy decision. Our clients notice the difference — and so do we."
+  },
+  {
+    "img": "/ethan-rowe.png",
+    "name": "Ethan Rowe",
+    "role": "Retail director",
+    "company": "Mod&Co",
+    "quote":
+      "What drew us in was the philosophy behind the product: quiet luxury, built with intention. Our customers value design with depth — and that's exactly what these frames deliver. It's not just eyewear; it's an experience we're proud to offer."
+  },
+  {
+    "img": "/elise-van-den-berg.png",
+    "name": "Élise Van den Berg",
+    "role": "Buyer & Curator",
+    "company": "Nord Optique",
+    "quote":
+      "We're very selective with what we bring into the studio, and this collection checked every box: elegant construction, timeless proportions, and a sense of calm confidence. The response from our clientele has been immediate."
+  }
+]

@@ -1,5 +1,5 @@
-import { useState, MouseEvent } from "react";
-import { useLocation } from 'wouter';
+import { useState } from "react";
+import { useLocation } from "wouter";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Navbar() {
@@ -25,7 +25,7 @@ export default function Navbar() {
   const handleLogIn = (): void => {
     setLocation("/login");
     setIsLoggedIn(true);
-  }
+  };
 
   return (
     <nav className="flex flex-wrap items-center justify-between py-4 px-6 md:px-12 lg:px-36 bg-bg-secondary w-full border-b-gray border-b-[1px] relative">
@@ -112,7 +112,10 @@ export default function Navbar() {
             className="flex flex-col items-center gap-4 mt-8 w-full max-w-xs transition-all duration-300 ease-in-out"
             style={{ transitionDelay: isMenuOpen ? "250ms" : "0ms" }}
           >
-            <button className="text-foreground hover:text-green transition-colors duration-300 cursor-pointer w-full text-center py-2" onClick={handleLogIn}>
+            <button
+              className="text-foreground hover:text-green transition-colors duration-300 cursor-pointer w-full text-center py-2"
+              onClick={handleLogIn}
+            >
               Log In
             </button>
             <button className="bg-green text-white px-8 py-3 rounded-full flex items-center justify-center gap-1 cursor-pointer w-full hover:bg-accent-foreground/80 transition-all duration-300">
@@ -159,7 +162,10 @@ export default function Navbar() {
       </ul>
 
       <div className="hidden lg:flex items-center gap-4">
-        <button className="text-foreground hover:text-green transition-colors duration-300 cursor-pointer" onClick={handleLogIn}>
+        <button
+          className="text-foreground hover:text-green transition-colors duration-300 cursor-pointer"
+          onClick={handleLogIn}
+        >
           Log In
         </button>
         <button className="bg-green text-white px-6 py-2 rounded-full flex items-center gap-1 hover:bg-opacity-90 transition-all duration-300 cursor-pointer hover:bg-accent-foreground/80">
