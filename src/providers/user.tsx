@@ -3,11 +3,15 @@ import {
   signIn as signInService,
   getCurrentUser,
   signOut as signOutService,
-} from "../services/localstorage/auth";
+} from "../services/localStorage/auth";
 import { AuthContext } from "./context";
 
-export const AuthContextProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+type AuthContextProviderProps = {
+  children: React.ReactNode;
+};
+
+export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,14 +29,16 @@ export const AuthContextProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-  const signIn = async (username, password) => {
+  const signIn = async (username: string, password: string) => {
     console.log(username, password);
 
     try {
       const user = await signInService(username, password);
+      setCurrentUser(user);
       return user;
     } catch (error) {
       console.error(error);
+      return "";
     }
   };
 

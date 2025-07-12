@@ -1,44 +1,37 @@
-import { type JSX, type MouseEvent } from "react";
+import { useContext, type JSX } from "react";
 import { useLocation } from "wouter";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { calculateStars } from "@/lib/utils";
 import { Button } from "./ui/button";
+import { CartContext } from "@/providers/context";
+import type { Product } from "@/lib/types";
 
-interface ProductCardProps {
+interface ProductCardProps extends Product {
   isLanding?: boolean;
-  img: string;
-  name: string;
-  description: string;
-  price: string;
-  id: string | number;
-  rating: number;
-  reviews: number;
 }
 
 export default function ProductCard({
   isLanding,
   img,
   name,
-  description,
   price,
   id,
   rating,
   reviews,
 }: ProductCardProps) {
   const [, setLocation] = useLocation();
+  const cartContext = useContext(CartContext);
 
   const handleClick = (): void => {
     setLocation(`/product/${id}`);
-
-    localStorage.setItem(
-      "product",
-      JSON.stringify({ img, name, description, price, id, rating, reviews })
-    );
   };
 
-  const handleAddToCart = (e: MouseEvent): void => {
-    e.stopPropagation();
+  const handleAddToCart = (): void => {
     console.log(`Añadido al carrito: ${name}`);
+
+    cartContext.increaseItemQuantity(id.toString());
+
+    console.log(cartContext.getItemQuantity(id.toString()));
   };
 
   const renderStars = (): JSX.Element[] => {
@@ -95,7 +88,9 @@ export default function ProductCard({
           <h5 className="text-lg font-medium font-garamond tracking-wide">
             {name}
           </h5>
-          {!isLanding && <span className="text-gold font-medium">{price}</span>}
+          {!isLanding && (
+            <span className="text-gold font-medium">${price}</span>
+          )}
         </div>
 
         <div className="flex items-center justify-between">

@@ -6,7 +6,8 @@ import NotFound from "./pages/404";
 import { useContext } from "react";
 import { AuthContext } from "./providers/context";
 import ProtectedRoutes from "./components/protected-routes";
-import ProductPage from './pages/Product';
+import ProductPage from "./pages/Product";
+import { CartContextProvider } from "./providers/cart";
 
 export default function App() {
   const context = useContext(AuthContext);
@@ -16,7 +17,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <CartContextProvider username={context.currentUser || ""}>
       <Switch>
         <Route path="/" component={Landing} />
         <Route path="/login" component={LogIn} />
@@ -25,13 +26,14 @@ export default function App() {
           <ProtectedRoutes>
             <Switch>
               <Route path="/home" component={Home} />
-              <Route path="/product/:id" component={ProductPage} />
+              <Route path="/product/:id">
+                {(params) => <ProductPage id={params.id} />}
+              </Route>
 
               <Route>
                 <NotFound />
               </Route>
             </Switch>
-
           </ProtectedRoutes>
         </Route>
 
@@ -39,6 +41,6 @@ export default function App() {
           <NotFound />
         </Route>
       </Switch>
-    </>
+    </CartContextProvider>
   );
 }

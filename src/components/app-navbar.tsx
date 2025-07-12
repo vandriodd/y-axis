@@ -1,9 +1,13 @@
 import { Link } from "wouter";
 import { Icon } from "@iconify/react/dist/iconify.js";
-
-const CART_ITEMS_COUNT = 3;
+import { useContext } from "react";
+import { CartContext } from "@/providers/context";
 
 export default function AppNavbar() {
+  const cartContext = useContext(CartContext);
+
+  const CART_ITEMS_COUNT = cartContext.cart.length;
+
   return (
     <nav className="flex flex-wrap items-center justify-between py-4 px-6 md:px-12 lg:px-36 bg-bg-secondary w-full border-b-gray border-b-[1px] relative">
       <Link to="/home" className="text-green">

@@ -1,23 +1,44 @@
-import { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button"
+import { useContext, useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { calculateStars } from "@/lib/utils";
-import PageLayout from '@/components/layout'
+import PageLayout from "@/components/layout";
+import { getProductById } from "@/services/localStorage/products";
+import { CartContext } from "@/providers/context";
 
 interface Product {
   id: string;
   name: string;
-  price: string;
+  price: number;
   rating: number;
   reviews: number;
   img: string;
   description: string;
 }
 
-export default function ProductPage() {
-  const [product, setProduct] = useState<Product | null>(null);
+export default function ProductPage({ id }: { id: string }) {
+  const cartContext = useContext(CartContext);
+  const [product, setProduct] = useState<Product | undefined>();
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(
+    cartContext.getItemQuantity(id) || 1
+  );
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const product = await getProductById(id);
+        if (!product) {
+          return;
+        }
+        setProduct(product);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   const productImages = [
     "/products/glasses1.jpg",
@@ -27,25 +48,18 @@ export default function ProductPage() {
     "/products/glasses5.jpg",
   ];
 
-  useEffect(() => {
-    const storedProduct = localStorage.getItem("product");
-    if (storedProduct) {
-      setProduct(JSON.parse(storedProduct));
-    }
-  }, []);
-
   const handleImageSelect = (index: number): void => {
     setSelectedImage(index);
   };
 
   const handleQuantityChange = (newQuantity: number): void => {
-    if (newQuantity >= 1 && newQuantity <= 10) {
+    if (newQuantity >= 1) {
       setQuantity(newQuantity);
     }
   };
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} of ${product?.name} to cart`);
+    cartContext.updateItemQuantity(id, quantity);
   };
 
   const renderStars = () => {
@@ -55,7 +69,7 @@ export default function ProductPage() {
     const starTypes = calculateStars(rating);
 
     return starTypes.map((type, index) => {
-      if (type === 'full') {
+      if (type === "full") {
         return (
           <Icon
             key={`star-full-${index}`}
@@ -63,7 +77,7 @@ export default function ProductPage() {
             className="text-gold"
           />
         );
-      } else if (type === 'half') {
+      } else if (type === "half") {
         return (
           <Icon
             key="star-half"
@@ -111,7 +125,9 @@ export default function ProductPage() {
                 <button
                   key={index}
                   onClick={() => handleImageSelect(index)}
-                  className={`flex-shrink-0 w-24 h-24 border ${selectedImage === index ? 'border-gold' : 'border-gold/50'} overflow-hidden`}
+                  className={`flex-shrink-0 w-24 h-24 border ${
+                    selectedImage === index ? "border-gold" : "border-gold/50"
+                  } overflow-hidden hover:scale-95 transition-all duration-300 cursor-pointer`}
                 >
                   <img
                     src={image}
@@ -126,15 +142,19 @@ export default function ProductPage() {
           <div className="w-full lg:w-1/2">
             <div className="flex flex-col space-y-6">
               <div>
-                <h1 className="text-3xl font-garamond font-bold mb-2">{product.name}</h1>
+                <h1 className="text-3xl font-garamond font-bold mb-2">
+                  {product.name}
+                </h1>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="flex">
-                      {renderStars()}
-                    </div>
-                    <span className="text-sm text-gray-400">({product.reviews} reviews)</span>
+                    <div className="flex">{renderStars()}</div>
+                    <span className="text-sm text-gray-400">
+                      ({product.reviews} reviews)
+                    </span>
                   </div>
-                  <span className="text-2xl font-medium text-gold">{product.price}</span>
+                  <span className="text-2xl font-medium text-gold">
+                    ${product.price}
+                  </span>
                 </div>
               </div>
 
@@ -147,9 +167,9 @@ export default function ProductPage() {
               <div>
                 <h3 className="font-medium mb-3">Color</h3>
                 <div className="flex gap-3">
-                  <button className="w-8 h-8 rounded-full bg-black border-2 border-transparent hover:border-gold focus:border-gold focus:outline-none"></button>
-                  <button className="w-8 h-8 rounded-full bg-amber-800 border-2 border-transparent hover:border-gold focus:border-gold focus:outline-none"></button>
-                  <button className="w-8 h-8 rounded-full bg-neutral-400 border-2 border-transparent hover:border-gold focus:border-gold focus:outline-none"></button>
+                  <button className="w-8 h-8 rounded-full bg-black border-2 border-transparent hover:border-gold focus:border-gold focus:outline-none cursor-pointer"></button>
+                  <button className="w-8 h-8 rounded-full bg-amber-800 border-2 border-transparent hover:border-gold focus:border-gold focus:outline-none cursor-pointer"></button>
+                  <button className="w-8 h-8 rounded-full bg-neutral-400 border-2 border-transparent hover:border-gold focus:border-gold focus:outline-none cursor-pointer"></button>
                 </div>
               </div>
 
@@ -159,17 +179,26 @@ export default function ProductPage() {
                   <button
                     onClick={() => handleQuantityChange(quantity - 1)}
                     disabled={quantity <= 1}
-                    className="px-3 py-1 text-gold disabled:text-gold/50"
+                    className="px-3 py-1 text-gold disabled:text-gold/50 disabled:cursor-auto cursor-pointer"
                   >
                     <Icon icon="mdi:minus" />
                   </button>
 
-                  <span className="px-4 py-1 border-x border-gold/30">{quantity}</span>
+                  <input
+                    type="text"
+                    pattern="[0-9]+"
+                    value={quantity}
+                    inputMode="numeric"
+                    onChange={(e) =>
+                      handleQuantityChange(Number(e.target.value) || 1)
+                    }
+                    className="px-4 py-1 border-x border-gold/30 focus:outline-none focus:ring-1 focus:ring-gold w-20 text-center"
+                  />
 
                   <button
                     onClick={() => handleQuantityChange(quantity + 1)}
-                    disabled={quantity >= 10}
-                    className="px-3 py-1 text-gold disabled:text-gold/50"
+                    disabled={quantity >= 2500}
+                    className="px-3 py-1 text-gold disabled:text-gold/50 disabled:cursor-auto cursor-pointer"
                   >
                     <Icon icon="mdi:plus" />
                   </button>
@@ -179,7 +208,8 @@ export default function ProductPage() {
               <div className="pt-4">
                 <Button
                   onClick={handleAddToCart}
-                  className="w-full md:w-auto px-8 py-2 bg-gold hover:bg-gold/90 text-white font-medium flex items-center justify-center gap-2"
+                  disabled={quantity <= 0}
+                  className="w-full md:w-auto px-8 py-2 bg-gold hover:bg-gold/90 text-white font-medium flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Icon icon="solar:cart-plus-bold" />
                   Add to Cart
@@ -188,7 +218,10 @@ export default function ProductPage() {
 
               <div className="pt-6">
                 <div className="flex items-center gap-2 text-sm mb-2">
-                  <Icon icon="solar:verified-check-bold" className="text-gold" />
+                  <Icon
+                    icon="solar:verified-check-bold"
+                    className="text-gold"
+                  />
                   <span>Premium handcrafted materials</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm mb-2">
