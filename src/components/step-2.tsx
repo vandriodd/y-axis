@@ -1,5 +1,5 @@
 import type { StepComponentProps } from "@/lib/constants";
-import Input from "./input";
+import { Input } from "./ui/input";
 
 export default function StepTwo({ formData, setFormData }: StepComponentProps) {
   return (
@@ -12,9 +12,9 @@ export default function StepTwo({ formData, setFormData }: StepComponentProps) {
         }
       />
 
-      <Input 
-        label="EIN" 
-        value={formData.ein || ""} 
+      <Input
+        label="EIN"
+        value={formData.ein || ""}
         onChange={(e) => setFormData({ ...formData, ein: e.target.value })}
       />
 

@@ -7,10 +7,14 @@ export const getProductById = async (
   return products.find((product) => product.id === id);
 };
 
-export const getBestSellers = (): Product[] => {
+export const getBestSellers = async (): Promise<Product[]> => {
   return products.filter((product) => product.isBestSeller);
 };
 
-export const getAllProducts = (): Product[] => {
+export const getProductsById = async (ids: string[]): Promise<Product[]> => {
+  return products.filter((product) => ids.includes(product.id));
+};
+
+export const getAllProducts = async (): Promise<Product[]> => {
   return products;
 };

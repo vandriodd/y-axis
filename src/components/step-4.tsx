@@ -1,5 +1,5 @@
 import type { StepComponentProps } from "@/lib/constants";
-import Input from "./input";
+import { Input } from "./ui/input";
 
 export default function StepFour({
   formData,

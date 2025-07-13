@@ -99,8 +99,6 @@ async function updateCartItemQuantity(
   if (productIndex !== -1) {
     userCart[productIndex].quantity = quantity;
   } else {
-    console.log("Product not found in cart");
-
     userCart.push({ productId, quantity });
   }
 

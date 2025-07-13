@@ -1,6 +1,6 @@
 import { TYPE_OF_BUSINESS } from "@/lib/constants";
 import type { StepComponentProps } from "@/lib/constants";
-import Input from "./input";
+import { Input } from "./ui/input";
 
 export default function StepOne({ formData, setFormData }: StepComponentProps) {
   return (

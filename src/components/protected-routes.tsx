@@ -1,15 +1,14 @@
-import { useContext, type ReactNode } from "react";
-import { AuthContext } from "../providers/context";
 import { Redirect } from "wouter";
+import useAuthContext from "@/hooks/useAuthContext";
 
 interface ProtectedRoutesProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default function ProtectedRoutes({ children }: ProtectedRoutesProps) {
-  const authContext = useContext(AuthContext);
+  const { currentUser, isLoading } = useAuthContext();
 
-  if (!authContext.isLoading && !authContext.currentUser) {
+  if (!isLoading && !currentUser) {
     return <Redirect to="/login" />;
   }
 

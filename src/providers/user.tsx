@@ -30,8 +30,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   }, []);
 
   const signIn = async (username: string, password: string) => {
-    console.log(username, password);
-
     try {
       const user = await signInService(username, password);
       setCurrentUser(user);

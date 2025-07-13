@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { calculateStars } from "@/lib/utils";
 import PageLayout from "@/components/layout";
 import { getProductById } from "@/services/localStorage/products";
-import { CartContext } from "@/providers/context";
+import useCartContext from "@/hooks/useCartContext";
 
 interface Product {
   id: string;
@@ -17,12 +17,10 @@ interface Product {
 }
 
 export default function ProductPage({ id }: { id: string }) {
-  const cartContext = useContext(CartContext);
+  const { getItemQuantity, updateItemQuantity } = useCartContext();
   const [product, setProduct] = useState<Product | undefined>();
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(
-    cartContext.getItemQuantity(id) || 1
-  );
+  const [quantity, setQuantity] = useState(getItemQuantity(id) || 1);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -59,7 +57,7 @@ export default function ProductPage({ id }: { id: string }) {
   };
 
   const handleAddToCart = () => {
-    cartContext.updateItemQuantity(id, quantity);
+    updateItemQuantity(id, quantity);
   };
 
   const renderStars = () => {
@@ -124,10 +122,13 @@ export default function ProductPage({ id }: { id: string }) {
               {productImages.map((image, index) => (
                 <button
                   key={index}
-                  onClick={() => handleImageSelect(index)}
+                  onMouseEnter={() => handleImageSelect(index)}
+                  data-active={selectedImage === index}
                   className={`flex-shrink-0 w-24 h-24 border ${
-                    selectedImage === index ? "border-gold" : "border-gold/50"
-                  } overflow-hidden hover:scale-95 transition-all duration-300 cursor-pointer`}
+                    selectedImage === index
+                      ? "border-gold border-2"
+                      : "border-gold/50"
+                  } overflow-hidden transition-all duration-300 cursor-pointer data-[active=false]:opacity-70 data-[active=false]:scale-90`}
                 >
                   <img
                     src={image}

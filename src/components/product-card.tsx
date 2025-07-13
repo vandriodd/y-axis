@@ -1,10 +1,10 @@
-import { useContext, type JSX } from "react";
+import { type JSX } from "react";
 import { useLocation } from "wouter";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { calculateStars } from "@/lib/utils";
 import { Button } from "./ui/button";
-import { CartContext } from "@/providers/context";
 import type { Product } from "@/lib/types";
+import useCartContext from "@/hooks/useCartContext";
 
 interface ProductCardProps extends Product {
   isLanding?: boolean;
@@ -20,14 +20,14 @@ export default function ProductCard({
   reviews,
 }: ProductCardProps) {
   const [, setLocation] = useLocation();
-  const cartContext = useContext(CartContext);
+  const { updateItemQuantity } = useCartContext();
 
   const handleClick = (): void => {
     setLocation(`/product/${id}`);
   };
 
   const handleAddToCart = (): void => {
-    cartContext.updateItemQuantity(id.toString(), 1);
+    updateItemQuantity(id.toString(), 1);
   };
 
   const renderStars = (): JSX.Element[] => {
@@ -81,9 +81,9 @@ export default function ProductCard({
 
       <div className="px-1 py-2">
         <div className="flex justify-between items-center mb-3">
-          <h5 className="text-lg font-medium font-garamond tracking-wide">
+          <h2 className="text-lg font-medium font-garamond tracking-wide">
             {name}
-          </h5>
+          </h2>
           {!isLanding && (
             <span className="text-gold font-medium">${price}</span>
           )}

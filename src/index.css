@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=EB%20Garamond&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=EB%20Garamond&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -13,7 +13,7 @@
   --color-gray: #e6e8ec;
   --color-bg-secondary: #fcfcfd;
   --color-foreground: #1a1a1a;
-  --color-accent-foreground: #5E765F;
+  --color-accent-foreground: #5e765f;
   --font-garamond: "EB Garamond", serif;
   --font-montserrat: "Montserrat", sans-serif;
   --tracking-subtitle: 0.3em;
@@ -79,8 +79,8 @@
   --secondary-foreground: var(--color-white);
   --muted: var(--base-100);
   --muted-foreground: var(--base-600);
-  --accent: var(--accent-foreground);
-  --accent-foreground: var(--color-green);
+  --accent: var(--color-green);
+  --accent-foreground: white;
   --destructive: oklch(0.577 0.245 27.325);
   --border: var(--base-200);
   --input: var(--base-300);
@@ -220,8 +220,13 @@
     @apply border-border outline-ring/50;
   }
 
+  html {
+    scrollbar-gutter: "stable both-edges";
+    overflow: auto;
+  }
+
   body {
-    @apply bg-background text-foreground ;
+    @apply bg-background text-foreground;
   }
 
   .font-display {
@@ -237,7 +242,7 @@
 }
 
 .primary-heading {
-  @apply text-6xl md:text-8xl font-bold text-accent-foreground font-garamond;
+  @apply text-6xl md:text-8xl font-bold text-accent font-garamond;
 }
 
 .title {
@@ -246,4 +251,22 @@
 
 .subtitle {
   @apply text-[1rem] uppercase tracking-subtitle text-gold;
+}
+
+@theme {
+  --animate-up-n-down: up-n-down 6s ease-in-out infinite;
+
+  @keyframes up-n-down {
+    0%,
+    40% {
+      transform: none;
+    }
+    4%,
+    32% {
+      transform: translateY(-4px);
+    }
+    16% {
+      transform: translateY(3px);
+    }
+  }
 }

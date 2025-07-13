@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { useLocation } from "wouter";
 import { Icon } from "@iconify/react";
-import { useContext } from "react";
-import { AuthContext } from "../providers/context";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { MIN_PASSWORD_LENGTH, MIN_USERNAME_LENGTH } from "@/lib/constants";
+import useAuthContext from "@/hooks/useAuthContext";
 
 interface FormErrors {
   username: string;
@@ -29,7 +31,7 @@ export default function LoginForm() {
     message: "",
   });
   const [, setLocation] = useLocation();
-  const authContext = useContext(AuthContext);
+  const { signIn } = useAuthContext();
 
   const togglePasswordVisibility = (): void => {
     setShowPassword(!showPassword);
@@ -42,16 +44,16 @@ export default function LoginForm() {
     if (!username.trim()) {
       newErrors.username = "Username is required";
       isValid = false;
-    } else if (username.length < 5) {
-      newErrors.username = "Username must be at least 5 characters";
+    } else if (username.length < MIN_USERNAME_LENGTH) {
+      newErrors.username = `Username must be at least ${MIN_USERNAME_LENGTH} characters`;
       isValid = false;
     }
 
     if (!password) {
       newErrors.password = "Password is required";
       isValid = false;
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+    } else if (password.length < MIN_PASSWORD_LENGTH) {
+      newErrors.password = `Password must be at least ${MIN_PASSWORD_LENGTH} characters`;
       isValid = false;
     }
 
@@ -65,7 +67,7 @@ export default function LoginForm() {
     const isValid = validateForm();
 
     if (isValid) {
-      const res = await authContext.signIn(username, password);
+      const res = await signIn(username, password);
 
       if (!res) {
         setFormStatus({
@@ -113,14 +115,9 @@ export default function LoginForm() {
         )}
 
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="username"
-            className="text-sm text-gold uppercase tracking-widest"
-          >
-            Username
-          </label>
-          <input
-            type="text"
+          <Input
+            id="username"
+            label="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className={`bg-green/10 p-3 focus:outline-none focus:ring-1 ${
@@ -135,16 +132,11 @@ export default function LoginForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="password"
-            className="text-sm uppercase text-gold tracking-widest"
-          >
-            Password
-          </label>
           <div className="relative">
-            <input
+            <Input
               type={showPassword ? "text" : "password"}
               value={password}
+              label="Password"
               onChange={(e) => setPassword(e.target.value)}
               className={`bg-green/10 p-3 w-full pr-10 focus:outline-none focus:ring-1 ${
                 errors.password
@@ -155,7 +147,7 @@ export default function LoginForm() {
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-500 hover:text-green focus:outline-none cursor-pointer"
+              className="absolute top-3/4 -translate-y-1/2 right-0 pr-3 flex items-center text-sm leading-5 text-gray-500 h-fit hover:text-green focus:outline-none cursor-pointer"
             >
               {showPassword ? (
                 <Icon icon="heroicons-solid:eye" width="20" height="20" />
@@ -169,12 +161,12 @@ export default function LoginForm() {
           )}
         </div>
 
-        <button
+        <Button
           type="submit"
           className="bg-green text-white px-6 py-3 flex items-center justify-center hover:bg-opacity-90 transition-all duration-300 cursor-pointer hover:bg-green/80 mt-4"
         >
           Log In
-        </button>
+        </Button>
       </form>
 
       <div className="flex items-center w-full my-6">
@@ -183,7 +175,7 @@ export default function LoginForm() {
         <div className="flex-grow h-px bg-gold/70"></div>
       </div>
 
-      <div className="text-center md:text-left">
+      <section className="text-center md:text-left">
         <small className="text-gold">
           Don't have an account?{" "}
           <a
@@ -193,7 +185,7 @@ export default function LoginForm() {
             Sign up
           </a>
         </small>
-      </div>
+      </section>
     </>
   );
 }

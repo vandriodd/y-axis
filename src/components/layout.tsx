@@ -1,6 +1,6 @@
-import { useEffect, useState, type ReactNode } from 'react';
-import AppNavbar from './app-navbar';
-import Footer from './footer';
+import { useEffect, useState, type ReactNode } from "react";
+import AppNavbar from "./app-navbar";
+import Footer from "./footer";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -35,11 +35,9 @@ export default function PageLayout({ children }: PageLayoutProps) {
         <AppNavbar />
       </div>
 
-      <main className="mt-[calc(64px+16px)]">
-        {children}
-      </main>
+      <main className="mt-[calc(64px+16px)]">{children}</main>
 
       <Footer />
     </>
-  )
+  );
 }

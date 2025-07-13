@@ -43,6 +43,16 @@ export default function Landing() {
     setLocation("/onboarding");
   };
 
+  const scrollToSpans = "Scroll to discover".split("").map((c, idx) => (
+    <span
+      key={idx}
+      className="text-gold font-garamond text-2xl"
+      style={{ animationDelay: `${idx * 0.05}s` }}
+    >
+      {c}
+    </span>
+  ));
+
   return (
     <>
       <div
@@ -64,8 +74,10 @@ export default function Landing() {
           href="#about-us"
           className="flex flex-col items-center gap-2 subtitle"
         >
-          Scroll to discover
-          <Icon icon="heroicons:arrow-down-20-solid" />
+          <div className="[&>span]:mx-0.5 [&>span]:inline-block [&>span]:animate-up-n-down">
+            {scrollToSpans}
+          </div>
+          <Icon fontSize={24} icon="heroicons:arrow-down-20-solid" />
         </a>
       </header>
 
