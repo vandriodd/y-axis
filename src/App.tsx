@@ -8,6 +8,7 @@ import { AuthContext } from "./providers/context";
 import ProtectedRoutes from "./components/protected-routes";
 import ProductPage from "./pages/Product";
 import { CartContextProvider } from "./providers/cart";
+import OnboardingPage from "./pages/Onboarding";
 
 export default function App() {
   const context = useContext(AuthContext);
@@ -21,6 +22,7 @@ export default function App() {
       <Switch>
         <Route path="/" component={Landing} />
         <Route path="/login" component={LogIn} />
+        <Route path="/onboarding" component={OnboardingPage} />
 
         <Route>
           <ProtectedRoutes>

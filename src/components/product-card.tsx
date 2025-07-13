@@ -27,11 +27,7 @@ export default function ProductCard({
   };
 
   const handleAddToCart = (): void => {
-    console.log(`Añadido al carrito: ${name}`);
-
-    cartContext.increaseItemQuantity(id.toString());
-
-    console.log(cartContext.getItemQuantity(id.toString()));
+    cartContext.updateItemQuantity(id.toString(), 1);
   };
 
   const renderStars = (): JSX.Element[] => {
@@ -102,7 +98,7 @@ export default function ProductCard({
           {isLanding ? (
             <Button
               variant="ghost"
-              className="px-4 text-green hover:text-green/80 hover:bg-green/10 transition-all duration-300"
+              className="px-4 text-green hover:text-green/80 hover:bg-green/10 transition-all duration-300 cursor-pointer"
             >
               Order Now
             </Button>

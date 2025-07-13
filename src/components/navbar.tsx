@@ -27,6 +27,10 @@ export default function Navbar() {
     setIsLoggedIn(true);
   };
 
+  const handleJoinUs = (): void => {
+    setLocation("/onboarding");
+  };
+
   return (
     <nav className="flex flex-wrap items-center justify-between py-4 px-6 md:px-12 lg:px-36 bg-bg-secondary w-full border-b-gray border-b-[1px] relative">
       <div className="text-green z-20">
@@ -118,7 +122,10 @@ export default function Navbar() {
             >
               Log In
             </button>
-            <button className="bg-green text-white px-8 py-3 rounded-full flex items-center justify-center gap-1 cursor-pointer w-full hover:bg-accent-foreground/80 transition-all duration-300">
+            <button
+              className="bg-green text-white px-8 py-3 rounded-full flex items-center justify-center gap-1 cursor-pointer w-full hover:bg-accent-foreground/80 transition-all duration-300"
+              onClick={handleJoinUs}
+            >
               Join Us{" "}
               <Icon icon="solar:arrow-right-up-linear" className="ml-1" />
             </button>
@@ -168,7 +175,10 @@ export default function Navbar() {
         >
           Log In
         </button>
-        <button className="bg-green text-white px-6 py-2 rounded-full flex items-center gap-1 hover:bg-opacity-90 transition-all duration-300 cursor-pointer hover:bg-accent-foreground/80">
+        <button
+          className="bg-green text-white px-6 py-2 rounded-full flex items-center gap-1 hover:bg-opacity-90 transition-all duration-300 cursor-pointer hover:bg-accent-foreground/80"
+          onClick={handleJoinUs}
+        >
           Join Us <Icon icon="solar:arrow-right-up-linear" />
         </button>
       </div>

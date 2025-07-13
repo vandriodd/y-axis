@@ -15,11 +15,13 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/product-card";
+import { useLocation } from "wouter";
 
 const bestSellers = products.filter((product) => product.isBestSeller);
 
 export default function Landing() {
   const [scrolled, setScrolled] = useState(false);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +38,10 @@ export default function Landing() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleJoinUs = (): void => {
+    setLocation("/onboarding");
+  };
 
   return (
     <>
@@ -114,8 +120,8 @@ export default function Landing() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="cursor-pointer" />
+              <CarouselNext className="cursor-pointer" />
             </Carousel>
           </div>
         </section>
@@ -183,8 +189,8 @@ export default function Landing() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="cursor-pointer hover:bg-gold hover:text-white transition-all duration-300" />
+              <CarouselNext className="cursor-pointer hover:bg-gold hover:text-white transition-all duration-300" />
             </Carousel>
           </div>
         </section>
@@ -210,7 +216,7 @@ export default function Landing() {
               service, and limited releases.
             </p>
 
-            <Button className="px-10">
+            <Button className="px-10 cursor-pointer" onClick={handleJoinUs}>
               Join Now
               <Icon icon="solar:arrow-right-up-linear" />
             </Button>
