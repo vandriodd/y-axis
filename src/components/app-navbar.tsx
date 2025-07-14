@@ -92,9 +92,9 @@ export default function AppNavbar() {
                     <span className="text-sm text-accent/60">x{quantity}</span>
                   </div>
                   <Button
-                    variant="ghost"
+                    variant="ghostDestructive"
                     size="icon"
-                    className="p-1 rounded-full text-red-500 hover:bg-red-100 transition-colors ml-auto"
+                    className="ml-auto"
                     onClick={() => removeFromCart(id)}
                     aria-label="Remove item"
                   >

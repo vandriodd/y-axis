@@ -1,7 +1,8 @@
 import type { Dispatch, SetStateAction } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { STEPS, type FormData } from "@/lib/constants";
+import { STEPS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import type { FormData } from "@/lib/types";
 
 interface OnboardingFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;

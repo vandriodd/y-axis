@@ -13,5 +13,6 @@ export default function useAuthContext() {
     isLoading: context.isLoading,
     signIn: context.signIn,
     signOut: context.signOut,
+    signUp: context.signUp,
   };
 }

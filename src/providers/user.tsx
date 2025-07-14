@@ -3,8 +3,10 @@ import {
   signIn as signInService,
   getCurrentUser,
   signOut as signOutService,
+  signUp as signUpService,
 } from "../services/localStorage/auth";
 import { AuthContext } from "./context";
+import type { UserWithData } from "@/lib/types";
 
 type AuthContextProviderProps = {
   children: React.ReactNode;
@@ -49,8 +51,21 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
   };
 
+  const signUp = async (user: UserWithData) => {
+    try {
+      const newUser = await signUpService(user);
+      setCurrentUser(newUser?.username || null);
+      return newUser;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser, isLoading, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ currentUser, isLoading, signIn, signOut, signUp }}
+    >
       {children}
     </AuthContext.Provider>
   );

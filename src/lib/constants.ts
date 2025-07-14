@@ -4,35 +4,7 @@ import StepTwo from "../components/step-2";
 import StepThree from "../components/step-3";
 import StepFour from "../components/step-4";
 import FinalStep from "@/components/final-step";
-
-export interface FormData {
-  tradeName: string;
-  typeOfBusiness: string;
-  parentCompany: string;
-  registeredName: string;
-  businessRegistrationNo: string;
-  ein: string;
-  vatRegistrationNo: string;
-  dateOfIncorporation: Date | undefined;
-  postalAddress: string;
-  shipmentAddress: string;
-  portOfShipment: string;
-  faxNo: string;
-  phoneNo: string;
-  firstName: string;
-  firstEmail: string;
-  secondName: string;
-  secondEmail: string;
-
-  username?: string;
-  password?: string;
-
-  isStep1Valid?: boolean;
-  isStep2Valid?: boolean;
-  isStep3Valid?: boolean;
-  isStep4Valid?: boolean;
-  isStep5Valid?: boolean;
-}
+import type { FormData } from "./types";
 
 export interface StepComponentProps {
   formData: FormData;

@@ -157,12 +157,13 @@ export default function CartPage() {
                   </TableCell>
                   <TableCell>
                     <Button
-                      variant="ghost"
+                      variant="ghostDestructive"
                       size="icon"
-                      className="hover:bg-red-400/20"
+                      className="ml-auto"
                       onClick={() => removeFromCart(product.id)}
+                      aria-label="Remove item"
                     >
-                      <Icon icon="gridicons:cross" className="text-red-400" />
+                      <Icon icon="gridicons:cross" />
                     </Button>
                   </TableCell>
                 </TableRow>

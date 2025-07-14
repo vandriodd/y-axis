@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { STEPS, type FormData } from "@/lib/constants";
+import { STEPS } from "@/lib/constants";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import OnboardingForm from "@/components/onboarding-form";
+import type { FormData } from "@/lib/types";
+import useAuthContext from "@/hooks/useAuthContext";
 
 export default function Onboarding() {
+  const { signIn, signUp } = useAuthContext();
   const [step, setStep] = useState<number>(0);
   const [, setLocation] = useLocation();
   const [formData, setFormData] = useState<FormData>({
@@ -26,10 +29,14 @@ export default function Onboarding() {
     secondName: "",
     secondEmail: "",
 
+    username: "",
+    password: "",
+
     isStep1Valid: false,
     isStep2Valid: false,
     isStep3Valid: false,
     isStep4Valid: false,
+    isStep5Valid: false,
   });
 
   const handleBack = () => {
@@ -38,11 +45,24 @@ export default function Onboarding() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step < STEPS.length - 1) {
       setStep(step + 1);
+      return;
     } else {
+      const user = await signUp(formData);
+
+      if (!user) {
+        setFormData((prev) => ({
+          ...prev,
+          isStep5Valid: false,
+        }));
+        return;
+      }
+
+      await signIn(user.username, user.password);
+
       setLocation("/home");
     }
   };

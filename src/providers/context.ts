@@ -1,11 +1,12 @@
 import { createContext } from "react";
-import type { ProductList } from "@/lib/types";
+import type { FormData, ProductList, UserWithData } from "@/lib/types";
 
 interface AuthContextType {
   currentUser: string | null;
   isLoading: boolean;
   signIn: (username: string, password: string) => Promise<string>;
   signOut: () => Promise<void>;
+  signUp: (user: FormData) => Promise<UserWithData | null>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -14,6 +15,10 @@ export const AuthContext = createContext<AuthContextType>({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   signIn: async (_username: string, _password: string) => "",
   signOut: async () => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  signUp: async (_user) => {
+    return null;
+  },
 });
 
 interface CartContextType {

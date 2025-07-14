@@ -3,6 +3,36 @@ export type User = {
   password: string;
 };
 
+export interface UserData {
+  tradeName: string;
+  typeOfBusiness: string;
+  parentCompany: string;
+  registeredName: string;
+  businessRegistrationNo: string;
+  ein: string;
+  vatRegistrationNo: string;
+  dateOfIncorporation: Date | undefined;
+  postalAddress: string;
+  shipmentAddress: string;
+  portOfShipment: string;
+  faxNo: string;
+  phoneNo: string;
+  firstName: string;
+  firstEmail: string;
+  secondName: string;
+  secondEmail: string;
+}
+
+export type UserWithData = User & UserData;
+
+export type FormData = UserWithData & {
+  isStep1Valid: boolean;
+  isStep2Valid: boolean;
+  isStep3Valid: boolean;
+  isStep4Valid: boolean;
+  isStep5Valid: boolean; // Optional for the final step
+};
+
 export type Product = {
   id: string;
   name: string;

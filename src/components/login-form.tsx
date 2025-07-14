@@ -73,7 +73,7 @@ export default function LoginForm() {
         setFormStatus({
           submitted: true,
           success: false,
-          message: "Something went wrong, please try again later.",
+          message: "Invalid credentials",
         });
         return;
       }

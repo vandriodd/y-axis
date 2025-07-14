@@ -1,11 +1,28 @@
-import { useState } from "react";
-import products from "../data/products.json";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "../components/page-layout";
 import ProductCard from "../components/product-card";
+import { getAllProducts } from "@/services/localStorage/products";
+import type { Product } from "@/lib/types";
 
 export default function Home() {
   const [visibleProducts, setVisibleProducts] = useState(8);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await getAllProducts();
+        const reversedProducts = [...res].reverse();
+
+        setProducts(reversedProducts);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const bestSellers = products.filter((product) => product.isBestSeller);
   const allProducts = products.slice(0, visibleProducts);
