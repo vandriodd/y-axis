@@ -61,6 +61,19 @@ export type CartItem = {
 
 export type ProductList = CartItem[];
 
+export type Order = {
+  id: string;
+  items: CartItem[];
+  totalAmount: number;
+  orderDate: Date;
+  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
+  review?: {
+    rating: number;
+    comment: string;
+    reviewDate: Date;
+  };
+};
+
 export type Cart = Map<string, ProductList>;
 
 export interface CartService {
@@ -78,5 +91,25 @@ export interface CartService {
   removeFromUserCart: (
     username: string,
     productId: Product["id"]
+  ) => Promise<void>;
+}
+
+export interface OrderService {
+  placeOrder: (
+    username: string,
+    items: CartItem[],
+    totalAmount: number
+  ) => Promise<Order>;
+  getUserOrders: (username: string) => Promise<Order[]>;
+  reviewOrder: (
+    username: string,
+    orderId: string,
+    rating: number,
+    comment: string
+  ) => Promise<void>;
+  updateOrderStatus: (
+    username: string,
+    orderId: string,
+    status: Order["status"]
   ) => Promise<void>;
 }

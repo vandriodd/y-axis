@@ -17,6 +17,7 @@ export async function signIn(username: string, password: string) {
   }
 
   window.localStorage.setItem(USER_KEY, username);
+
   return username;
 }
 
@@ -43,7 +44,9 @@ export async function getCurrentUser() {
     window.localStorage.getItem(USERS_DATA) || "{}"
   );
 
-  return existingUsers[username] || null;
+  if (!existingUsers[username]) return null;
+
+  return username;
 }
 
 export async function signOut() {

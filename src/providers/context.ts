@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { FormData, ProductList, UserWithData } from "@/lib/types";
+import type { FormData, ProductList, UserWithData, Order } from "@/lib/types";
 
 interface AuthContextType {
   currentUser: string | null;
@@ -33,6 +33,7 @@ interface CartContextType {
   getItemQuantity: (id: string) => number;
   updateItemQuantity: (id: string, quantity: number) => void;
   removeFromCart: (id: string) => void;
+  placeOrder: (totalAmount: number) => Promise<Order>;
 }
 
 export const CartContext = createContext<CartContextType>({
@@ -40,4 +41,7 @@ export const CartContext = createContext<CartContextType>({
   getItemQuantity: () => 0,
   updateItemQuantity: () => {},
   removeFromCart: () => {},
+  placeOrder: async () => {
+    throw new Error("placeOrder not implemented");
+  },
 });

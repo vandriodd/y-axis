@@ -142,11 +142,16 @@ export default function AppNavbar() {
               <h2 className="text-lg font-semibold">User Menu</h2>
               <Link
                 to="/profile"
+                replace={true}
                 className="hover:text-green transition-colors"
               >
                 Profile
               </Link>
-              <Link to="/orders" className="hover:text-green transition-colors">
+              <Link
+                href="/profile?tab=orders"
+                replace={true}
+                className="hover:text-green transition-colors"
+              >
                 Orders
               </Link>
             </div>

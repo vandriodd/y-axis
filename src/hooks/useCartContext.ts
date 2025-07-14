@@ -7,7 +7,13 @@ export default function useCartContext() {
   if (!ctx) {
     throw new Error("useCartContext must be used within a CartContextProvider");
   }
-  const { cart, getItemQuantity, updateItemQuantity, removeFromCart } = ctx;
+  const {
+    cart,
+    getItemQuantity,
+    updateItemQuantity,
+    removeFromCart,
+    placeOrder,
+  } = ctx;
 
   const isInCart = (productId: string): boolean => {
     return cart.some((item) => item.productId === productId);
@@ -18,6 +24,7 @@ export default function useCartContext() {
     getItemQuantity,
     updateItemQuantity,
     removeFromCart,
+    placeOrder,
     isInCart,
   };
 }

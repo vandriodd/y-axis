@@ -29,8 +29,10 @@ type Products = (Product & {
 })[];
 
 export default function CartPage() {
-  const { cart, updateItemQuantity, removeFromCart } = useCartContext();
+  const { cart, updateItemQuantity, removeFromCart, placeOrder } =
+    useCartContext();
   const [products, setProducts] = useState<Products>([]);
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
   const [, setLocation] = useLocation();
 
@@ -58,9 +60,29 @@ export default function CartPage() {
 
   const CART_ITEMS_COUNT = cart.length;
 
+  const totalAmount = products.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
+
   const handleQuantityChange = (newQuantity: number): void => {
     if (newQuantity >= 1) {
       updateItemQuantity(cart[0].productId, newQuantity);
+    }
+  };
+
+  const handlePlaceOrder = async () => {
+    if (cart.length === 0) return;
+
+    setIsPlacingOrder(true);
+    try {
+      await placeOrder(totalAmount);
+      setLocation("/profile?tab=orders");
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("Failed to place order. Please try again.");
+    } finally {
+      setIsPlacingOrder(false);
     }
   };
 
@@ -187,18 +209,16 @@ export default function CartPage() {
                   Total price:
                 </small>
                 <p className="text-primary text-xl">
-                  $
-                  {products
-                    .reduce(
-                      (total, product) =>
-                        total + product.price * product.quantity,
-                      0
-                    )
-                    .toFixed(2)}
+                  ${totalAmount.toFixed(2)}
                 </p>
               </div>
 
-              <Button>Checkout</Button>
+              <Button
+                onClick={handlePlaceOrder}
+                disabled={cart.length === 0 || isPlacingOrder}
+              >
+                {isPlacingOrder ? "Placing Order..." : "Place Order"}
+              </Button>
             </div>
           </div>
         </div>

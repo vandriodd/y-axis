@@ -13,51 +13,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useAuthContext from "@/hooks/useAuthContext";
 import CompanyInformation from "@/components/profile/company-information";
 import OrderHistory from "@/components/profile/order-history";
-import type { Order } from "@/components/profile/order-history";
 import OrderTracking from "@/components/profile/order-tracking";
 import ContactPersons from "@/components/profile/contact-persons";
 import ContactDetails from "@/components/profile/contact-details";
 import AccountInformation from "@/components/profile/account-information";
 import BusinessRegistration from "@/components/profile/business-registration";
-
-const mockOrders: Order[] = [
-  {
-    id: "ORD-9384",
-    date: "2025-07-01",
-    status: "Delivered",
-    total: 1299.99,
-    items: 3,
-    trackingNumber: "TRK-78901234",
-  },
-  {
-    id: "ORD-6721",
-    date: "2025-06-15",
-    status: "Processing",
-    total: 849.5,
-    items: 2,
-    trackingNumber: "TRK-45678901",
-  },
-  {
-    id: "ORD-4532",
-    date: "2025-05-28",
-    status: "Delivered",
-    total: 2450.0,
-    items: 5,
-    trackingNumber: "TRK-12345678",
-  },
-  {
-    id: "ORD-2198",
-    date: "2025-04-10",
-    status: "Cancelled",
-    total: 599.99,
-    items: 1,
-    trackingNumber: "TRK-98765432",
-  },
-];
+import { useSearchParams } from "wouter";
 
 export default function Profile() {
   const { getUserData, saveProfileData } = useAuthContext();
-  const [activeTab, setActiveTab] = useState("profile");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(() => {
+    const tab = searchParams.get("tab");
+    return tab ? tab : "profile";
+  });
 
   const [profileData, setProfileData] = useState<ProfileData>({
     tradeName: "",
@@ -88,6 +57,15 @@ export default function Profile() {
 
     isSaving: false,
   });
+
+  useEffect(() => {
+    setSearchParams({ tab: activeTab });
+  }, [activeTab, setSearchParams]);
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    setActiveTab(tab ?? "profile");
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -139,7 +117,13 @@ export default function Profile() {
           </div>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs
+          value={activeTab}
+          onValueChange={(v) => {
+            setActiveTab(v);
+          }}
+          className="w-full"
+        >
           <TabsList className="grid grid-cols-2 mb-8 bg-gray-100">
             <TabsTrigger
               value="profile"
@@ -190,7 +174,7 @@ export default function Profile() {
           </TabsContent>
 
           <TabsContent value="orders" className="space-y-4">
-            <OrderHistory orders={mockOrders} />
+            <OrderHistory />
             <OrderTracking />
           </TabsContent>
         </Tabs>

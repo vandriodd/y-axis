@@ -12,7 +12,6 @@ const links = [
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [, setIsLoggedIn] = useState(false);
   const [, setLocation] = useLocation();
 
   const toggleMenu = (): void => {
@@ -32,7 +31,6 @@ export default function Navbar() {
 
   const handleLogIn = (): void => {
     setLocation("/login");
-    setIsLoggedIn(true);
   };
 
   const handleJoinUs = (): void => {

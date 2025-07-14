@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CartContext } from "./context";
 import type { ProductList } from "@/lib/types";
-import { cartService } from "@/services/localStorage/cart";
+import { cartAndOrderService } from "@/services/localStorage/cart";
 
 type CartContextProviderProps = {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export const CartContextProvider = ({
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const cart = await cartService.getUserCart(username);
+        const cart = await cartAndOrderService.getUserCart(username);
         setCart(cart);
       } catch (error) {
         console.error(error);
@@ -33,7 +33,7 @@ export const CartContextProvider = ({
 
   const updateItemQuantity = async (id: string, quantity: number) => {
     try {
-      await cartService.updateCartItemQuantity(username, id, quantity);
+      await cartAndOrderService.updateCartItemQuantity(username, id, quantity);
     } catch (error) {
       console.error(error);
       return;
@@ -55,7 +55,7 @@ export const CartContextProvider = ({
 
   const removeFromCart = async (id: string) => {
     try {
-      await cartService.removeFromUserCart(username, id);
+      await cartAndOrderService.removeFromUserCart(username, id);
     } catch (error) {
       console.error(error);
       return;
@@ -66,6 +66,22 @@ export const CartContextProvider = ({
     });
   };
 
+  const placeOrder = async (totalAmount: number) => {
+    try {
+      const order = await cartAndOrderService.placeOrder(
+        username,
+        cart,
+        totalAmount
+      );
+      await cartAndOrderService.clearUserCart(username);
+      setCart([]);
+      return order;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -73,6 +89,7 @@ export const CartContextProvider = ({
         getItemQuantity,
         updateItemQuantity,
         removeFromCart,
+        placeOrder,
       }}
     >
       {children}
