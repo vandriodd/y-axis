@@ -143,7 +143,7 @@ export default function AppNavbar() {
               <Link
                 to="/profile"
                 replace={true}
-                className="hover:text-green transition-colors"
+                className="hover:text-green transition-colors border-b-[1px] border-gold/20 pb-4"
               >
                 Profile
               </Link>
@@ -159,7 +159,7 @@ export default function AppNavbar() {
             <div className="flex justify-end">
               <Button
                 variant="destructive"
-                className="w-full bg-transparent text-destructive shadow-none hover:text-white"
+                className="w-full bg-transparent text-destructive shadow-none hover:text-red-500 hover:bg-destructive/20 border-[0.5px] border-red-500"
                 onClick={signOut}
               >
                 Logout

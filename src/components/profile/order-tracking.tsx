@@ -20,8 +20,7 @@ export default function OrderTracking() {
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden">
       <div className="p-5 border-b border-gray-100">
-        <h3 className="text-lg font-medium flex items-center text-gray-800">
-          <Icon icon="mdi:package-variant" className="mr-2 text-accent" />
+        <h3 className="text-3xl font-medium flex items-center text-gray-800 font-garamond">
           Track Your Order
         </h3>
       </div>

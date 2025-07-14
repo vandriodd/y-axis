@@ -181,8 +181,7 @@ export default function OrderHistory() {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <div className="p-5 border-b border-gray-100 flex justify-between items-center">
-          <h3 className="text-lg font-medium flex items-center text-gray-800">
-            <Icon icon="mdi:history" className="mr-2 text-accent" />
+          <h3 className="font-medium flex items-center text-gray-800 font-garamond text-3xl">
             Order History
           </h3>
 
