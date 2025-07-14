@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import useCartContext from "@/hooks/useCartContext";
 import {
@@ -20,9 +20,9 @@ export default function AppNavbar() {
   const { cart } = useCartContext();
   const { signOut } = useAuthContext();
   const [products, setProducts] = useState<Products>([]);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Assuming cart is an array of objects with productId and quantity
     const fetchProducts = async () => {
       try {
         const response = await getProductsById(
@@ -71,24 +71,27 @@ export default function AppNavbar() {
             <div className="flex flex-col space-y-4">
               <h2 className="text-lg font-semibold">Cart Items</h2>
               {products.map(({ id, name, quantity, img, price }) => (
-                // TODOOOO
                 <div key={id} className="flex items-center justify-between">
                   <img
                     src={img}
                     alt={name}
-                    className="w-12 h-12 object-cover rounded"
+                    className="w-12 h-12 object-cover border-[0.5px] border-gold/30s"
                   />
                   <span className="text-sm text-gray-700">
                     ${price.toFixed(2)}
                   </span>
-                  <span className="text-sm text-gray-500">x{quantity}</span>
-                  <span>{name}</span>
-                  <span className="text-sm text-gray-500">
-                    Quantity: {quantity}
-                  </span>
+                  <span className="text-sm text-accent/60">x{quantity}</span>
+                  <span className="text-base font-garamond">{name}</span>
                 </div>
               ))}
-              <Button className="w-full">Checkout!</Button>
+              <Button
+                className="w-full"
+                onClick={() => {
+                  setLocation("/cart");
+                }}
+              >
+                View Cart
+              </Button>
             </div>
           </PopoverContent>
         </Popover>

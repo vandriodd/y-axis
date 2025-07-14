@@ -8,6 +8,7 @@ import ProductPage from "./pages/Product";
 import { CartContextProvider } from "./providers/cart";
 import OnboardingPage from "./pages/Onboarding";
 import useAuthContext from "./hooks/useAuthContext";
+import CartPage from "./pages/Cart";
 
 export default function App() {
   const { currentUser = "", isLoading } = useAuthContext();
@@ -32,6 +33,7 @@ export default function App() {
               <Route path="/product/:id">
                 {(params) => <ProductPage id={params.id} />}
               </Route>
+              <Route path="/cart" component={CartPage} />
 
               <Route>
                 <NotFound />

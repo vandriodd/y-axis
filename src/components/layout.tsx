@@ -35,7 +35,9 @@ export default function PageLayout({ children }: PageLayoutProps) {
         <AppNavbar />
       </div>
 
-      <main className="mt-[calc(64px+16px)]">{children}</main>
+      <main className="mt-[calc(64px+16px)] min-h-[calc(100vh-73px-321px)]">
+        {children}
+      </main>
 
       <Footer />
     </>

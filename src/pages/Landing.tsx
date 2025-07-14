@@ -74,7 +74,7 @@ export default function Landing() {
           href="#about-us"
           className="flex flex-col items-center gap-2 subtitle"
         >
-          <div className="[&>span]:mx-0.5 [&>span]:inline-block [&>span]:animate-up-n-down">
+          <div className="[&>span]:text-lg [&>span]:md:text-xl [&>span]:mx-0.5 [&>span]:inline-block [&>span]:animate-up-n-down">
             {scrollToSpans}
           </div>
           <Icon fontSize={24} icon="heroicons:arrow-down-20-solid" />
