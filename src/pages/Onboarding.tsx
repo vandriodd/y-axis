@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { STEPS } from "@/lib/constants";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import OnboardingForm from "@/components/onboarding-form";
+import OnboardingForm from "@/components/onboarding/onboarding-form";
 import type { FormData } from "@/lib/types";
 import useAuthContext from "@/hooks/useAuthContext";
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type { StepComponentProps } from "@/lib/constants";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export default function FinalStep({
   formData,

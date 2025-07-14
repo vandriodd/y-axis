@@ -9,6 +9,7 @@ import { CartContextProvider } from "./providers/cart";
 import OnboardingPage from "./pages/Onboarding";
 import useAuthContext from "./hooks/useAuthContext";
 import CartPage from "./pages/Cart";
+import Profile from "./pages/Profile";
 
 export default function App() {
   const { currentUser = "", isLoading } = useAuthContext();
@@ -34,6 +35,7 @@ export default function App() {
                 {(params) => <ProductPage id={params.id} />}
               </Route>
               <Route path="/cart" component={CartPage} />
+              <Route path="/profile" component={Profile} />
 
               <Route>
                 <NotFound />

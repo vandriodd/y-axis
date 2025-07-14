@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import type { StepComponentProps } from "@/lib/constants";
-import { Input } from "./ui/input";
-import { Calendar } from "./ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Button } from "./ui/button";
+import { Input } from "../ui/input";
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
 
 export default function StepTwo({ formData, setFormData }: StepComponentProps) {
   const [open, setOpen] = useState(false);

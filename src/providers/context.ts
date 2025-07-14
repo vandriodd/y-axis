@@ -7,6 +7,8 @@ interface AuthContextType {
   signIn: (username: string, password: string) => Promise<string>;
   signOut: () => Promise<void>;
   signUp: (user: FormData) => Promise<UserWithData | null>;
+  getUserData: () => Promise<UserWithData | null>;
+  saveProfileData: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -19,6 +21,10 @@ export const AuthContext = createContext<AuthContextType>({
   signUp: async (_user) => {
     return null;
   },
+  getUserData: async () => {
+    return null;
+  },
+  saveProfileData: async () => {},
 });
 
 interface CartContextType {

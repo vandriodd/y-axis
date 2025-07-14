@@ -1,10 +1,10 @@
 import type { FC, Dispatch, SetStateAction } from "react";
-import StepOne from "../components/step-1";
-import StepTwo from "../components/step-2";
-import StepThree from "../components/step-3";
-import StepFour from "../components/step-4";
-import FinalStep from "@/components/final-step";
-import type { FormData } from "./types";
+import StepOne from "../components/onboarding/step-1";
+import StepTwo from "../components/onboarding/step-2";
+import StepThree from "../components/onboarding/step-3";
+import StepFour from "../components/onboarding/step-4";
+import FinalStep from "@/components/onboarding/final-step";
+import type { FormData } from "./types.d";
 
 export interface StepComponentProps {
   formData: FormData;

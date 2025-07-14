@@ -14,5 +14,7 @@ export default function useAuthContext() {
     signIn: context.signIn,
     signOut: context.signOut,
     signUp: context.signUp,
+    getUserData: context.getUserData,
+    saveProfileData: context.saveProfileData,
   };
 }

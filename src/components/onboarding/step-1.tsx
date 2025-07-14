@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { TYPE_OF_BUSINESS } from "@/lib/constants";
 import type { StepComponentProps } from "@/lib/constants";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "../ui/select";
 
 export default function StepOne({ formData, setFormData }: StepComponentProps) {
   useEffect(() => {

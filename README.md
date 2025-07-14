@@ -30,7 +30,7 @@ Y-Axis is a premium eyewear brand website showcasing luxury, handcrafted eyewear
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/y-axis.git
+git clone https://github.com/vandriodd/y-axis.git
 
 # Navigate to project directory
 cd y-axis

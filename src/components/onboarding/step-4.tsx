@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { StepComponentProps } from "@/lib/constants";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 
 export default function StepFour({
   formData,

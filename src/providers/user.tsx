@@ -4,6 +4,8 @@ import {
   getCurrentUser,
   signOut as signOutService,
   signUp as signUpService,
+  getUserData as getUserDataService,
+  saveProfileData as saveProfileDataService,
 } from "../services/localStorage/auth";
 import { AuthContext } from "./context";
 import type { UserWithData } from "@/lib/types";
@@ -62,9 +64,35 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
   };
 
+  const getUserData = async () => {
+    try {
+      const user = await getUserDataService();
+      return user;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
+  const saveProfileData = async () => {
+    try {
+      await saveProfileDataService();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ currentUser, isLoading, signIn, signOut, signUp }}
+      value={{
+        currentUser,
+        isLoading,
+        signIn,
+        signOut,
+        signUp,
+        getUserData,
+        saveProfileData,
+      }}
     >
       {children}
     </AuthContext.Provider>

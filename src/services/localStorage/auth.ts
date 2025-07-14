@@ -1,16 +1,12 @@
 import type { UserWithData } from "@/lib/types";
 
-const USER_KEY = "currentUser";
-const USERS_KEY = "users";
+export const USER_KEY = "currentUser";
+export const USERS_DATA = "users";
 
 export async function signIn(username: string, password: string) {
   const existingUsers = JSON.parse(
-    window.localStorage.getItem(USERS_KEY) || "{}"
+    window.localStorage.getItem(USERS_DATA) || "{}"
   );
-
-  console.log("Attempting to sign in with username:", username);
-  console.log("Attempting to sign in with password:", password);
-  console.log("Existing users:", existingUsers);
 
   if (!existingUsers[username]) {
     return "";
@@ -26,7 +22,7 @@ export async function signIn(username: string, password: string) {
 
 export async function signUp(user: UserWithData): Promise<UserWithData | null> {
   const existingUsers = JSON.parse(
-    window.localStorage.getItem(USERS_KEY) || "{}"
+    window.localStorage.getItem(USERS_DATA) || "{}"
   );
 
   if (existingUsers[user.username]) {
@@ -34,7 +30,7 @@ export async function signUp(user: UserWithData): Promise<UserWithData | null> {
   }
 
   existingUsers[user.username] = user;
-  window.localStorage.setItem(USERS_KEY, JSON.stringify(existingUsers));
+  window.localStorage.setItem(USERS_DATA, JSON.stringify(existingUsers));
 
   return user;
 }
@@ -44,7 +40,7 @@ export async function getCurrentUser() {
   if (!username) return null;
 
   const existingUsers = JSON.parse(
-    window.localStorage.getItem(USERS_KEY) || "{}"
+    window.localStorage.getItem(USERS_DATA) || "{}"
   );
 
   return existingUsers[username] || null;
@@ -52,4 +48,26 @@ export async function getCurrentUser() {
 
 export async function signOut() {
   window.localStorage.removeItem(USER_KEY);
+}
+
+export async function getUserData() {
+  const username = window.localStorage.getItem(USER_KEY);
+  if (!username) return null;
+
+  const existingUsers = JSON.parse(
+    window.localStorage.getItem(USERS_DATA) || "{}"
+  );
+
+  return existingUsers[username] || null;
+}
+
+export async function saveProfileData() {
+  const username = window.localStorage.getItem(USER_KEY);
+  if (!username) return null;
+
+  const existingUsers = JSON.parse(
+    window.localStorage.getItem(USERS_DATA) || "{}"
+  );
+
+  return existingUsers[username] || null;
 }

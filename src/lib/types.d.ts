@@ -25,12 +25,22 @@ export interface UserData {
 
 export type UserWithData = User & UserData;
 
+export type ProfileData = UserWithData & {
+  accountInformationEditing: boolean;
+  companyInformationEditing: boolean;
+  businessRegistrationEditing: boolean;
+  contactDetailsEditing: boolean;
+  contactPersonsEditing: boolean;
+
+  isSaving: boolean;
+};
+
 export type FormData = UserWithData & {
   isStep1Valid: boolean;
   isStep2Valid: boolean;
   isStep3Valid: boolean;
   isStep4Valid: boolean;
-  isStep5Valid: boolean; // Optional for the final step
+  isStep5Valid: boolean;
 };
 
 export type Product = {
