@@ -87,7 +87,7 @@ export default function Landing() {
           className="bg-bg-secondary py-12 px-6 md:py-20 md:px-36"
         >
           <div className="flex flex-col xl:flex-row items-center gap-16 max-w-6xl mx-auto">
-            <img src="/about-us-img.png" alt="about-us-img" />
+            <img src="/about-us.png" alt="about-us-img" />
             <div className="flex flex-col">
               <header className="heading">
                 <h3>Who we are</h3>
@@ -157,7 +157,7 @@ export default function Landing() {
                 {reasons.map((reason, i) => (
                   <li
                     key={`${reason.title}-${i}`}
-                    className="flex flex-row gap-8 py-4 border-b-gold border-b-[1px]"
+                    className="flex flex-row gap-8 py-4 border-b-gold border-b-[1px] last:border-b-0"
                   >
                     <span className="text-gold font-garamond font-bold">
                       0{i + 1}

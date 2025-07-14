@@ -31,8 +31,13 @@ export default function BusinessRegistration({
         <div className="flex gap-2">
           {!isEditing ? (
             <button
-              onClick={() => setProfileData(prev => ({ ...prev, businessRegistrationEditing: true }))}
-              className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center"
+              onClick={() =>
+                setProfileData((prev) => ({
+                  ...prev,
+                  businessRegistrationEditing: true,
+                }))
+              }
+              className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center cursor-pointer"
             >
               <Icon icon="mdi:pencil" className="mr-1" />
               Edit
@@ -40,8 +45,13 @@ export default function BusinessRegistration({
           ) : (
             <>
               <button
-                onClick={() => setProfileData(prev => ({ ...prev, businessRegistrationEditing: false }))}
-                className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center"
+                onClick={() =>
+                  setProfileData((prev) => ({
+                    ...prev,
+                    businessRegistrationEditing: false,
+                  }))
+                }
+                className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center cursor-pointer"
               >
                 <Icon icon="mdi:close" className="mr-1" />
                 Cancel
@@ -49,10 +59,13 @@ export default function BusinessRegistration({
               <button
                 onClick={() => {
                   saveProfileData();
-                  setProfileData(prev => ({ ...prev, businessRegistrationEditing: false }));
+                  setProfileData((prev) => ({
+                    ...prev,
+                    businessRegistrationEditing: false,
+                  }));
                 }}
                 disabled={isSaving}
-                className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed"
+                className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSaving ? (
                   <Icon icon="mdi:loading" className="mr-1 animate-spin" />
@@ -71,7 +84,10 @@ export default function BusinessRegistration({
           label="Business Registration Number"
           value={profileData.businessRegistrationNo}
           onChange={(e) =>
-            setProfileData(prev => ({ ...prev, businessRegistrationNo: e.target.value }))
+            setProfileData((prev) => ({
+              ...prev,
+              businessRegistrationNo: e.target.value,
+            }))
           }
           readOnly={!isEditing}
           className={!isEditing ? "bg-gray-50" : ""}
@@ -80,7 +96,9 @@ export default function BusinessRegistration({
         <Input
           label="EIN"
           value={profileData.ein}
-          onChange={(e) => setProfileData(prev => ({ ...prev, ein: e.target.value }))}
+          onChange={(e) =>
+            setProfileData((prev) => ({ ...prev, ein: e.target.value }))
+          }
           readOnly={!isEditing}
           className={!isEditing ? "bg-gray-50" : ""}
         />
@@ -89,14 +107,17 @@ export default function BusinessRegistration({
           label="VAT Registration Number"
           value={profileData.vatRegistrationNo}
           onChange={(e) =>
-            setProfileData(prev => ({ ...prev, vatRegistrationNo: e.target.value }))
+            setProfileData((prev) => ({
+              ...prev,
+              vatRegistrationNo: e.target.value,
+            }))
           }
           readOnly={!isEditing}
           className={!isEditing ? "bg-gray-50" : ""}
         />
 
         <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 uppercase text-gold tracking-widest">
             Date of Incorporation
           </label>
           {isEditing ? (
@@ -122,7 +143,10 @@ export default function BusinessRegistration({
                   mode="single"
                   selected={profileData.dateOfIncorporation}
                   onSelect={(date) => {
-                    setProfileData(prev => ({ ...prev, dateOfIncorporation: date }));
+                    setProfileData((prev) => ({
+                      ...prev,
+                      dateOfIncorporation: date,
+                    }));
                     setIsDatePickerOpen(false);
                   }}
                   initialFocus

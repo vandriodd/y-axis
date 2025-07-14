@@ -104,7 +104,7 @@ export default function Navbar() {
               Log In
             </button>
             <Button
-              className="px-8 py-3 rounded-full flex items-center justify-center gap-1 w-full transition-all duration-500"
+              className="px-8 py-3 flex items-center justify-center gap-1 w-full transition-all duration-500 uppercase"
               size="lg"
               onClick={handleJoinUs}
             >
@@ -139,7 +139,7 @@ export default function Navbar() {
           Log In
         </button>
         <button
-          className="bg-green text-white px-6 py-2 rounded-full flex items-center gap-1 hover:bg-opacity-90 transition-all duration-300 cursor-pointer hover:bg-accent-foreground/80"
+          className="bg-green text-white px-6 py-2 flex items-center gap-1 hover:bg-green/80 transition-all duration-300 cursor-pointer"
           onClick={handleJoinUs}
         >
           Join Us <Icon icon="solar:arrow-right-up-linear" />

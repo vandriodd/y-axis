@@ -127,14 +127,14 @@ export default function Profile() {
           <TabsList className="grid grid-cols-2 mb-8 bg-gray-100">
             <TabsTrigger
               value="profile"
-              className="data-[state=active]:bg-white data-[state=active]:text-accent"
+              className="data-[state=active]:bg-white data-[state=active]:text-accent cursor-pointer"
             >
               <Icon icon="mdi:account" className="mr-2" />
               Profile
             </TabsTrigger>
             <TabsTrigger
               value="orders"
-              className="data-[state=active]:bg-white data-[state=active]:text-accent"
+              className="data-[state=active]:bg-white data-[state=active]:text-accent cursor-pointer"
             >
               <Icon icon="mdi:shopping-outline" className="mr-2" />
               Order History

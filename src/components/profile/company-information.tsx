@@ -24,7 +24,8 @@ export default function CompanyInformation({
 }: CompanyInformationProps) {
   const isEditing = profileData.companyInformationEditing;
   const isSaving = profileData.isSaving;
-  const { tradeName, typeOfBusiness, parentCompany, registeredName } = profileData;
+  const { tradeName, typeOfBusiness, parentCompany, registeredName } =
+    profileData;
 
   return (
     <div className="border-[0.5px] border-gold rounded-md overflow-hidden bg-white">
@@ -34,8 +35,13 @@ export default function CompanyInformation({
         </h2>
         {!isEditing ? (
           <button
-            onClick={() => setProfileData(prev => ({ ...prev, companyInformationEditing: true }))}
-            className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center"
+            onClick={() =>
+              setProfileData((prev) => ({
+                ...prev,
+                companyInformationEditing: true,
+              }))
+            }
+            className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center cursor-pointer"
           >
             <Icon icon="mdi:pencil" className="mr-1" />
             Edit
@@ -43,8 +49,13 @@ export default function CompanyInformation({
         ) : (
           <div className="flex gap-2">
             <button
-              onClick={() => setProfileData(prev => ({ ...prev, companyInformationEditing: false }))}
-              className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center"
+              onClick={() =>
+                setProfileData((prev) => ({
+                  ...prev,
+                  companyInformationEditing: false,
+                }))
+              }
+              className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center cursor-pointer"
             >
               <Icon icon="mdi:close" className="mr-1" />
               Cancel
@@ -52,10 +63,13 @@ export default function CompanyInformation({
             <button
               onClick={() => {
                 saveProfileData();
-                setProfileData(prev => ({ ...prev, companyInformationEditing: false }));
+                setProfileData((prev) => ({
+                  ...prev,
+                  companyInformationEditing: false,
+                }));
               }}
               disabled={isSaving}
-              className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed"
+              className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
             >
               {isSaving ? (
                 <>
@@ -77,20 +91,22 @@ export default function CompanyInformation({
         <Input
           label="Trade Name"
           value={tradeName}
-          onChange={(e) => setProfileData(prev => ({ ...prev, tradeName: e.target.value }))}
+          onChange={(e) =>
+            setProfileData((prev) => ({ ...prev, tradeName: e.target.value }))
+          }
           readOnly={!isEditing}
           className={!isEditing ? "bg-gray-50" : ""}
         />
 
         <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 uppercase text-gold tracking-widest">
             Type of Business
           </label>
           {isEditing ? (
             <Select
               value={typeOfBusiness}
               onValueChange={(value) =>
-                setProfileData(prev => ({ ...prev, typeOfBusiness: value }))
+                setProfileData((prev) => ({ ...prev, typeOfBusiness: value }))
               }
             >
               <SelectTrigger className="w-full">
@@ -119,7 +135,12 @@ export default function CompanyInformation({
         <Input
           label="Parent Company"
           value={parentCompany}
-          onChange={(e) => setProfileData(prev => ({ ...prev, parentCompany: e.target.value }))}
+          onChange={(e) =>
+            setProfileData((prev) => ({
+              ...prev,
+              parentCompany: e.target.value,
+            }))
+          }
           readOnly={!isEditing}
           className={!isEditing ? "bg-gray-50" : ""}
         />
@@ -127,7 +148,12 @@ export default function CompanyInformation({
         <Input
           label="Registered Name"
           value={registeredName}
-          onChange={(e) => setProfileData(prev => ({ ...prev, registeredName: e.target.value }))}
+          onChange={(e) =>
+            setProfileData((prev) => ({
+              ...prev,
+              registeredName: e.target.value,
+            }))
+          }
           readOnly={!isEditing}
           className={!isEditing ? "bg-gray-50" : ""}
         />

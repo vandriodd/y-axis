@@ -1,5 +1,4 @@
 import { Modal } from "../ui/modal";
-import { Button } from "../ui/button";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import type { Order } from "@/lib/types";
 
@@ -54,17 +53,16 @@ export function OrderDetailsModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Order Details" size="lg">
       <div className="space-y-6">
-        {/* Order Summary */}
-        <div className="bg-gray-50 p-4 rounded-lg">
+        <div className="border-[0.5px] border-gold p-4 rounded-lg">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium text-gray-600">
+              <label className="text-sm font-medium uppercase tracking-wider text-gold">
                 Order ID
               </label>
-              <p className="text-lg font-mono">{order.id}</p>
+              <p className="text-lg truncate">{order.id}</p>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-600">
+              <label className="text-sm font-medium uppercase tracking-wider text-gold">
                 Order Date
               </label>
               <p className="text-lg">
@@ -72,7 +70,7 @@ export function OrderDetailsModal({
               </p>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-600">
+              <label className="text-sm font-medium uppercase tracking-wider text-gold">
                 Total Amount
               </label>
               <p className="text-lg font-semibold text-green-600">
@@ -80,7 +78,7 @@ export function OrderDetailsModal({
               </p>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-600">
+              <label className="text-sm font-medium uppercase tracking-wider text-gold">
                 Status
               </label>
               <div className="flex items-center space-x-2">
@@ -97,42 +95,38 @@ export function OrderDetailsModal({
           </div>
         </div>
 
-        {/* Order Items */}
         <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
-            <Icon icon="mdi:package-variant" className="mr-2" />
-            Order Items ({order.items.length})
+          <h3 className="text-xl font-medium mb-3 flex items-center font-garamond">
+            Order Items&nbsp;
+            <span className="text-gold"> ({order.items.length})</span>
           </h3>
           <div className="space-y-3">
             {order.items.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg"
+                className="flex items-center justify-between p-3 bg-white border-[0.5px] border-gold rounded-lg"
               >
                 <div className="flex-1">
                   <p className="font-medium text-gray-900">
                     {getProductName(item.productId)}
                   </p>
-                  <p className="text-sm text-gray-500">
-                    Product ID: {item.productId}
-                  </p>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium">Qty: {item.quantity}</p>
+                  <p className="font-medium uppercase text-gold">
+                    Qty: {item.quantity}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Review Section */}
         {order.review && (
           <div>
-            <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
-              <Icon icon="mdi:star" className="mr-2" />
+            <h3 className="text-xl font-medium text-gray-900 mb-3 flex items-center font-garamond">
               Your Review
             </h3>
-            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <div className="bg-yellow-50 p-4 rounded-lg border-[0.5px] border-yellow-200">
               <div className="flex items-center space-x-2 mb-2">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
@@ -160,10 +154,8 @@ export function OrderDetailsModal({
           </div>
         )}
 
-        {/* Order Timeline (Simple version) */}
         <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
-            <Icon icon="mdi:timeline" className="mr-2" />
+          <h3 className="text-xl font-medium text-gray-900 mb-3 flex items-center font-garamond">
             Order Timeline
           </h3>
           <div className="space-y-2">
@@ -192,10 +184,6 @@ export function OrderDetailsModal({
             )}
           </div>
         </div>
-      </div>
-
-      <div className="flex justify-end p-6 border-t border-gray-200">
-        <Button onClick={onClose}>Close</Button>
       </div>
     </Modal>
   );

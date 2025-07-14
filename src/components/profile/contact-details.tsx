@@ -25,8 +25,13 @@ export default function ContactDetails({
         <div className="flex gap-2">
           {!isEditing ? (
             <button
-              onClick={() => setProfileData(prev => ({ ...prev, contactDetailsEditing: true }))}
-              className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center"
+              onClick={() =>
+                setProfileData((prev) => ({
+                  ...prev,
+                  contactDetailsEditing: true,
+                }))
+              }
+              className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center cursor-pointer"
             >
               <Icon icon="mdi:pencil" className="mr-1" />
               Edit
@@ -34,8 +39,13 @@ export default function ContactDetails({
           ) : (
             <>
               <button
-                onClick={() => setProfileData(prev => ({ ...prev, contactDetailsEditing: false }))}
-                className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center"
+                onClick={() =>
+                  setProfileData((prev) => ({
+                    ...prev,
+                    contactDetailsEditing: false,
+                  }))
+                }
+                className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center cursor-pointer"
               >
                 <Icon icon="mdi:close" className="mr-1" />
                 Cancel
@@ -43,10 +53,13 @@ export default function ContactDetails({
               <button
                 onClick={() => {
                   saveProfileData();
-                  setProfileData(prev => ({ ...prev, contactDetailsEditing: false }));
+                  setProfileData((prev) => ({
+                    ...prev,
+                    contactDetailsEditing: false,
+                  }));
                 }}
                 disabled={isSaving}
-                className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed"
+                className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSaving ? (
                   <Icon icon="mdi:loading" className="mr-1 animate-spin" />
@@ -65,7 +78,12 @@ export default function ContactDetails({
           <Input
             label="Postal Address"
             value={profileData.postalAddress}
-            onChange={(e) => setProfileData(prev => ({ ...prev, postalAddress: e.target.value }))}
+            onChange={(e) =>
+              setProfileData((prev) => ({
+                ...prev,
+                postalAddress: e.target.value,
+              }))
+            }
             readOnly={!isEditing}
             className={!isEditing ? "bg-gray-50" : ""}
           />
@@ -74,7 +92,10 @@ export default function ContactDetails({
             label="Shipment Address"
             value={profileData.shipmentAddress}
             onChange={(e) =>
-              setProfileData(prev => ({ ...prev, shipmentAddress: e.target.value }))
+              setProfileData((prev) => ({
+                ...prev,
+                shipmentAddress: e.target.value,
+              }))
             }
             readOnly={!isEditing}
             className={!isEditing ? "bg-gray-50" : ""}
@@ -86,7 +107,10 @@ export default function ContactDetails({
             label="Port of Shipment"
             value={profileData.portOfShipment}
             onChange={(e) =>
-              setProfileData(prev => ({ ...prev, portOfShipment: e.target.value }))
+              setProfileData((prev) => ({
+                ...prev,
+                portOfShipment: e.target.value,
+              }))
             }
             readOnly={!isEditing}
             className={!isEditing ? "bg-gray-50" : ""}
@@ -95,7 +119,9 @@ export default function ContactDetails({
           <Input
             label="Phone Number"
             value={profileData.phoneNo}
-            onChange={(e) => setProfileData(prev => ({ ...prev, phoneNo: e.target.value }))}
+            onChange={(e) =>
+              setProfileData((prev) => ({ ...prev, phoneNo: e.target.value }))
+            }
             readOnly={!isEditing}
             className={!isEditing ? "bg-gray-50" : ""}
           />
@@ -103,7 +129,9 @@ export default function ContactDetails({
           <Input
             label="Fax Number"
             value={profileData.faxNo}
-            onChange={(e) => setProfileData(prev => ({ ...prev, faxNo: e.target.value }))}
+            onChange={(e) =>
+              setProfileData((prev) => ({ ...prev, faxNo: e.target.value }))
+            }
             readOnly={!isEditing}
             className={!isEditing ? "bg-gray-50" : ""}
           />

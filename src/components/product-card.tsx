@@ -99,6 +99,7 @@ export default function ProductCard({
             <Button
               variant="ghost"
               className="px-4 text-green hover:text-green/80 hover:bg-green/10 transition-all duration-300 cursor-pointer"
+              onClick={() => setLocation(`/product/${id}`)}
             >
               Order Now
             </Button>

@@ -25,8 +25,13 @@ export default function AccountInformation({
         <div className="flex gap-2">
           {!isEditing ? (
             <button
-              onClick={() => setProfileData(prev => ({ ...prev, accountInformationEditing: true }))}
-              className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center"
+              onClick={() =>
+                setProfileData((prev) => ({
+                  ...prev,
+                  accountInformationEditing: true,
+                }))
+              }
+              className="px-4 py-1 text-sm border border-gold text-gold hover:bg-gold hover:text-white transition-colors rounded-sm flex items-center cursor-pointer"
             >
               <Icon icon="mdi:pencil" className="mr-1" />
               Edit
@@ -34,8 +39,13 @@ export default function AccountInformation({
           ) : (
             <>
               <button
-                onClick={() => setProfileData(prev => ({ ...prev, accountInformationEditing: false }))}
-                className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center"
+                onClick={() =>
+                  setProfileData((prev) => ({
+                    ...prev,
+                    accountInformationEditing: false,
+                  }))
+                }
+                className="px-4 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors rounded-sm flex items-center cursor-pointer"
               >
                 <Icon icon="mdi:close" className="mr-1" />
                 Cancel
@@ -43,10 +53,13 @@ export default function AccountInformation({
               <button
                 onClick={() => {
                   saveProfileData();
-                  setProfileData(prev => ({ ...prev, accountInformationEditing: false }));
+                  setProfileData((prev) => ({
+                    ...prev,
+                    accountInformationEditing: false,
+                  }));
                 }}
                 disabled={isSaving}
-                className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed"
+                className="px-4 py-1 text-sm border border-gold bg-gold text-white hover:bg-gold/90 transition-colors rounded-sm flex items-center disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSaving ? (
                   <Icon icon="mdi:loading" className="mr-1 animate-spin" />
@@ -80,7 +93,12 @@ export default function AccountInformation({
               type="password"
               value={profileData.password}
               readOnly={!isEditing}
-              onChange={(e) => setProfileData(prev => ({ ...prev, password: e.target.value }))}
+              onChange={(e) =>
+                setProfileData((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
+              }
               className={!isEditing ? "bg-gray-50" : ""}
             />
             {isEditing && (

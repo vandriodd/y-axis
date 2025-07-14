@@ -34,26 +34,24 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
       onClick={handleBackdropClick}
     >
       <div
         className={`bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
+          <h2 className="text-3xl font-garamond">{title}</h2>
           <Button
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="h-8 w-8 p-0 hover:bg-gray-100"
+            className="h-8 w-8 p-0 hover:bg-green/10 hover:text-accent transition-all duration-150"
           >
             <Icon icon="mdi:close" className="h-4 w-4" />
           </Button>
         </div>
 
-        {/* Content */}
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           {children}
         </div>

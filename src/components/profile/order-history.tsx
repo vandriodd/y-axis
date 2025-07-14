@@ -34,7 +34,6 @@ export default function OrderHistory() {
   const [loading, setLoading] = useState(true);
   const [showAdminMode, setShowAdminMode] = useState(false);
 
-  // Modal states
   const [reviewModalOpen, setReviewModalOpen] = useState(false);
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState<string>("");
@@ -48,7 +47,6 @@ export default function OrderHistory() {
         const userOrders = await orderService.getUserOrders(currentUser);
         setOrders(userOrders);
 
-        // Get all unique product IDs from all orders
         const productIds = Array.from(
           new Set(
             userOrders.flatMap((order) =>
@@ -111,7 +109,6 @@ export default function OrderHistory() {
         rating,
         comment
       );
-      // Refresh orders
       const userOrders = await orderService.getUserOrders(currentUser);
       setOrders(userOrders);
     } catch (error) {
@@ -133,7 +130,6 @@ export default function OrderHistory() {
 
     try {
       await orderService.updateOrderStatus(currentUser, orderId, newStatus);
-      // Refresh orders after status change
       const userOrders = await orderService.getUserOrders(currentUser);
       setOrders(userOrders);
     } catch (error) {
@@ -147,7 +143,6 @@ export default function OrderHistory() {
 
     try {
       await devUtils.simulateOrderProgression(currentUser, orderId);
-      // Refresh orders after progression
       const userOrders = await orderService.getUserOrders(currentUser);
       setOrders(userOrders);
     } catch (error) {
@@ -180,13 +175,13 @@ export default function OrderHistory() {
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-        <div className="p-5 border-b border-gray-100 flex justify-between items-center">
+        <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row gap-4 md:justify-between items-start md:items-center">
           <h3 className="font-medium flex items-center text-gray-800 font-garamond text-3xl">
             Order History
           </h3>
 
           <div className="flex items-center space-x-4">
-            <div className="w-72">
+            <div className="w-64">
               <Input
                 placeholder="Search by order or tracking #"
                 value={searchTerm}
@@ -198,22 +193,20 @@ export default function OrderHistory() {
 
             <Button
               variant="outline"
-              size="sm"
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-0 md:space-x-2"
               onClick={() => setShowAdminMode((prev) => !prev)}
             >
               <Icon
                 icon={showAdminMode ? "mdi:shield-off" : "mdi:shield-check"}
                 className="text-gray-500"
               />
-              <span className="text-gray-700">
+              <span className="hidden md:flex text-gray-700">
                 {showAdminMode ? "Disable" : "Enable"} Admin Mode
               </span>
             </Button>
           </div>
         </div>
 
-        {/* Order Management Controls */}
         {showAdminMode && (
           <div className="mb-6">
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
@@ -246,22 +239,22 @@ export default function OrderHistory() {
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-gray-50">
-                    <TableHead className="font-medium">Order ID</TableHead>
-                    <TableHead className="font-medium">Date</TableHead>
-                    <TableHead className="font-medium">Items</TableHead>
-                    <TableHead className="font-medium">Total</TableHead>
-                    <TableHead className="font-medium">Status</TableHead>
-                    <TableHead className="font-medium">Actions</TableHead>
+                  <TableRow className="bg-gold/10">
+                    <TableHead>Order ID</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Items</TableHead>
+                    <TableHead>Total</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredOrders.map((order) => (
                     <TableRow
                       key={order.id}
-                      className="border-b border-gray-100"
+                      className="border-b border-gray-100 hover:bg-transparent"
                     >
-                      <TableCell className="font-medium">{order.id}</TableCell>
+                      <TableCell>{order.id}</TableCell>
                       <TableCell>
                         {new Date(order.orderDate).toLocaleDateString()}
                       </TableCell>
@@ -277,7 +270,7 @@ export default function OrderHistory() {
                             order.status.slice(1)}
                         </span>
                       </TableCell>
-                      <TableCell className="space-x-2">
+                      <TableCell className="flex gap-2 items-center">
                         <Button
                           variant="ghost"
                           size="sm"
@@ -370,7 +363,6 @@ export default function OrderHistory() {
         </div>
       </div>
 
-      {/* Review Modal */}
       <ReviewModal
         isOpen={reviewModalOpen}
         onClose={() => setReviewModalOpen(false)}
@@ -378,7 +370,6 @@ export default function OrderHistory() {
         orderId={selectedOrderId}
       />
 
-      {/* Order Details Modal */}
       <OrderDetailsModal
         isOpen={detailsModalOpen}
         onClose={() => setDetailsModalOpen(false)}
