@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
-import PageLayout from "@/components/layout";
+import PageLayout from "@/components/page-layout";
 import {
   Table,
   TableBody,
@@ -14,6 +14,13 @@ import { Button } from "@/components/ui/button";
 import { type CartItem, type Product } from "@/lib/types.d";
 import { getProductsById } from "@/services/localStorage/products";
 import useCartContext from "@/hooks/useCartContext";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const COLUMNS = ["Product", "Price", "Quantity", "Subtotal", ""];
 
@@ -59,6 +66,20 @@ export default function CartPage() {
 
   return (
     <PageLayout>
+      <Breadcrumb className="mb-6">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/home">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem className="text-accent">
+            <BreadcrumbLink className="hover:text-accent/80" href={`/cart`}>
+              Cart
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
       <div className="container mx-auto px-4 py-8">
         <header>
           <h1 className="flex items-center gap-2 text-2xl md:text-3xl font-bold font-garamond mb-6">

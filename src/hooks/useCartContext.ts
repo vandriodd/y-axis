@@ -9,10 +9,15 @@ export default function useCartContext() {
   }
   const { cart, getItemQuantity, updateItemQuantity, removeFromCart } = ctx;
 
+  const isInCart = (productId: string): boolean => {
+    return cart.some((item) => item.productId === productId);
+  };
+
   return {
     cart,
     getItemQuantity,
     updateItemQuantity,
     removeFromCart,
+    isInCart,
   };
 }

@@ -6,7 +6,7 @@ export default function StepTwo({ formData, setFormData }: StepComponentProps) {
     <>
       <Input
         label="Business Registration Number"
-        value={formData.businessRegistrationNo || ""}
+        value={formData.businessRegistrationNo}
         onChange={(e) =>
           setFormData({ ...formData, businessRegistrationNo: e.target.value })
         }
@@ -14,13 +14,13 @@ export default function StepTwo({ formData, setFormData }: StepComponentProps) {
 
       <Input
         label="EIN"
-        value={formData.ein || ""}
+        value={formData.ein}
         onChange={(e) => setFormData({ ...formData, ein: e.target.value })}
       />
 
       <Input
         label="VAT Registration Number"
-        value={formData.vatRegistrationNo || ""}
+        value={formData.vatRegistrationNo}
         onChange={(e) =>
           setFormData({ ...formData, vatRegistrationNo: e.target.value })
         }
@@ -28,7 +28,7 @@ export default function StepTwo({ formData, setFormData }: StepComponentProps) {
 
       <Input
         label="Date of Incorporation"
-        value={formData.dateOfIncorporation || ""}
+        value={formData.dateOfIncorporation}
         onChange={(e) =>
           setFormData({ ...formData, dateOfIncorporation: e.target.value })
         }

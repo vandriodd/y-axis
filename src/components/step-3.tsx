@@ -9,7 +9,7 @@ export default function StepThree({
     <>
       <Input
         label="Postal Address"
-        value={formData.postalAddress || ""}
+        value={formData.postalAddress}
         onChange={(e) =>
           setFormData({ ...formData, postalAddress: e.target.value })
         }
@@ -17,7 +17,7 @@ export default function StepThree({
 
       <Input
         label="Shipment Address"
-        value={formData.shipmentAddress || ""}
+        value={formData.shipmentAddress}
         onChange={(e) =>
           setFormData({ ...formData, shipmentAddress: e.target.value })
         }
@@ -25,7 +25,7 @@ export default function StepThree({
 
       <Input
         label="Port of Shipment"
-        value={formData.portOfShipment || ""}
+        value={formData.portOfShipment}
         onChange={(e) =>
           setFormData({ ...formData, portOfShipment: e.target.value })
         }
@@ -33,13 +33,13 @@ export default function StepThree({
 
       <Input
         label="Fax No"
-        value={formData.faxNo || ""}
+        value={formData.faxNo}
         onChange={(e) => setFormData({ ...formData, faxNo: e.target.value })}
       />
 
       <Input
         label="Phone No"
-        value={formData.phoneNo || ""}
+        value={formData.phoneNo}
         onChange={(e) => setFormData({ ...formData, phoneNo: e.target.value })}
       />
     </>

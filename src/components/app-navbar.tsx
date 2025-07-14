@@ -17,7 +17,7 @@ type Products = (Product & {
 })[];
 
 export default function AppNavbar() {
-  const { cart } = useCartContext();
+  const { cart, removeFromCart } = useCartContext();
   const { signOut } = useAuthContext();
   const [products, setProducts] = useState<Products>([]);
   const [, setLocation] = useLocation();
@@ -68,22 +68,57 @@ export default function AppNavbar() {
             </button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
-            <div className="flex flex-col space-y-4">
+            <aside className="flex flex-col space-y-4">
               <h2 className="text-lg font-semibold">Cart Items</h2>
               {products.map(({ id, name, quantity, img, price }) => (
-                <div key={id} className="flex items-center justify-between">
+                <article key={id} className="flex items-center gap-3">
                   <img
                     src={img}
                     alt={name}
-                    className="w-12 h-12 object-cover border-[0.5px] border-gold/30s"
+                    className="w-16 h-16 object-cover border-[0.5px] border-gold/30"
                   />
-                  <span className="text-sm text-gray-700">
-                    ${price.toFixed(2)}
-                  </span>
-                  <span className="text-sm text-accent/60">x{quantity}</span>
-                  <span className="text-base font-garamond">{name}</span>
-                </div>
+                  <div>
+                    <Link
+                      href={`/product/${id}`}
+                      className="hover:text-green transition-colors"
+                    >
+                      <h4 className="text-lg font-semibold font-garamond">
+                        {name}
+                      </h4>
+                    </Link>
+                    <span className="text-sm text-gray-700 mr-1">
+                      ${price.toFixed(2)}
+                    </span>
+                    <span className="text-sm text-accent/60">x{quantity}</span>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="p-1 rounded-full text-red-500 hover:bg-red-100 transition-colors ml-auto"
+                    onClick={() => removeFromCart(id)}
+                    aria-label="Remove item"
+                  >
+                    <Icon icon="gridicons:cross" className="w-4 h-4" />
+                  </Button>
+                </article>
               ))}
+
+              <div className="flex gap-2 items-center">
+                <small className="text-primary uppercase tracking-wider">
+                  Total price:
+                </small>
+                <p className="ml-auto text-primary">
+                  $
+                  {products
+                    .reduce(
+                      (total, product) =>
+                        total + product.price * product.quantity,
+                      0
+                    )
+                    .toFixed(2)}
+                </p>
+              </div>
+
               <Button
                 className="w-full"
                 onClick={() => {
@@ -92,7 +127,7 @@ export default function AppNavbar() {
               >
                 View Cart
               </Button>
-            </div>
+            </aside>
           </PopoverContent>
         </Popover>
 

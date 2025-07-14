@@ -36,7 +36,9 @@ export default function PageLayout({ children }: PageLayoutProps) {
       </div>
 
       <main className="mt-[calc(64px+16px)] min-h-[calc(100vh-73px-321px)]">
-        {children}
+        <div className="container mx-auto px-4 py-8 pt-6 md:pb-12">
+          {children}
+        </div>
       </main>
 
       <Footer />
