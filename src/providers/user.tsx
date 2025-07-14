@@ -74,9 +74,9 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
   };
 
-  const saveProfileData = async () => {
+  const saveProfileData = async (user: UserWithData) => {
     try {
-      await saveProfileDataService();
+      await saveProfileDataService(user);
     } catch (error) {
       console.error(error);
     }

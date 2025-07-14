@@ -8,7 +8,7 @@ interface AuthContextType {
   signOut: () => Promise<void>;
   signUp: (user: FormData) => Promise<UserWithData | null>;
   getUserData: () => Promise<UserWithData | null>;
-  saveProfileData: () => Promise<void>;
+  saveProfileData: (user: UserWithData) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -24,7 +24,8 @@ export const AuthContext = createContext<AuthContextType>({
   getUserData: async () => {
     return null;
   },
-  saveProfileData: async () => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  saveProfileData: async (_user: UserWithData) => {},
 });
 
 interface CartContextType {

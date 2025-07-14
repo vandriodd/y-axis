@@ -61,13 +61,19 @@ export async function getUserData() {
   return existingUsers[username] || null;
 }
 
-export async function saveProfileData() {
+export async function saveProfileData(user: UserWithData) {
   const username = window.localStorage.getItem(USER_KEY);
   if (!username) return null;
 
   const existingUsers = JSON.parse(
     window.localStorage.getItem(USERS_DATA) || "{}"
   );
+  existingUsers[username] = {
+    ...existingUsers[username],
+    ...user,
+  };
+
+  window.localStorage.setItem(USERS_DATA, JSON.stringify(existingUsers));
 
   return existingUsers[username] || null;
 }

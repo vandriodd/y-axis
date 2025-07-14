@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { ProfileData, UserWithData } from "@/lib/types.d";
+import type { ProfileData } from "@/lib/types.d";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import PageLayout from "@/components/page-layout";
 import {
@@ -19,7 +19,6 @@ import ContactPersons from "@/components/profile/contact-persons";
 import ContactDetails from "@/components/profile/contact-details";
 import AccountInformation from "@/components/profile/account-information";
 import BusinessRegistration from "@/components/profile/business-registration";
-import { USERS_DATA } from "@/services/localStorage/auth";
 
 const mockOrders: Order[] = [
   {
@@ -57,7 +56,7 @@ const mockOrders: Order[] = [
 ];
 
 export default function Profile() {
-  const { getUserData } = useAuthContext();
+  const { getUserData, saveProfileData } = useAuthContext();
   const [activeTab, setActiveTab] = useState("profile");
 
   const [profileData, setProfileData] = useState<ProfileData>({
@@ -103,20 +102,8 @@ export default function Profile() {
     fetchUserData();
   }, [getUserData]);
 
-  const saveProfileData = () => {
-    setProfileData((prev) => ({ ...prev, isSaving: true }));
-
-    const userDataToSave = { ...profileData } as Partial<UserWithData>;
-
-    if (userDataToSave.password === "********") {
-      delete userDataToSave.password;
-    }
-
-    localStorage.setItem(USERS_DATA, JSON.stringify(userDataToSave));
-
-    setTimeout(() => {
-      setProfileData((prev) => ({ ...prev, isSaving: false }));
-    }, 1000);
+  const updateProfile = () => {
+    saveProfileData(profileData);
   };
 
   if (!profileData) {
@@ -174,31 +161,31 @@ export default function Profile() {
             <CompanyInformation
               profileData={profileData}
               setProfileData={setProfileData}
-              saveProfileData={saveProfileData}
+              saveProfileData={updateProfile}
             />
 
             <BusinessRegistration
               profileData={profileData}
               setProfileData={setProfileData}
-              saveProfileData={saveProfileData}
+              saveProfileData={updateProfile}
             />
 
             <ContactDetails
               profileData={profileData}
               setProfileData={setProfileData}
-              saveProfileData={saveProfileData}
+              saveProfileData={updateProfile}
             />
 
             <ContactPersons
               profileData={profileData}
               setProfileData={setProfileData}
-              saveProfileData={saveProfileData}
+              saveProfileData={updateProfile}
             />
 
             <AccountInformation
               profileData={profileData}
               setProfileData={setProfileData}
-              saveProfileData={saveProfileData}
+              saveProfileData={updateProfile}
             />
           </TabsContent>
 
