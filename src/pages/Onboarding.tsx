@@ -15,7 +15,7 @@ export default function Onboarding() {
     businessRegistrationNo: "",
     ein: "",
     vatRegistrationNo: "",
-    dateOfIncorporation: "",
+    dateOfIncorporation: undefined,
     postalAddress: "",
     shipmentAddress: "",
     portOfShipment: "",

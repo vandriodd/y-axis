@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { TYPE_OF_BUSINESS } from "@/lib/constants";
 import type { StepComponentProps } from "@/lib/constants";
 import { Input } from "./ui/input";
@@ -8,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { useEffect } from "react";
 
 export default function StepOne({ formData, setFormData }: StepComponentProps) {
   useEffect(() => {
@@ -35,6 +35,7 @@ export default function StepOne({ formData, setFormData }: StepComponentProps) {
     <>
       <Input
         label="Trade Name"
+        placeholder="Marble"
         value={formData.tradeName}
         onChange={(e) =>
           setFormData({ ...formData, tradeName: e.target.value })
@@ -43,6 +44,7 @@ export default function StepOne({ formData, setFormData }: StepComponentProps) {
 
       <Select
         label="Type of Business"
+        value={formData.typeOfBusiness}
         onValueChange={(value) =>
           setFormData({ ...formData, typeOfBusiness: value })
         }
@@ -61,6 +63,7 @@ export default function StepOne({ formData, setFormData }: StepComponentProps) {
 
       <Input
         label="Parent Company"
+        placeholder="Marble Fishing LLC"
         value={formData.parentCompany}
         onChange={(e) =>
           setFormData({ ...formData, parentCompany: e.target.value })
@@ -69,6 +72,7 @@ export default function StepOne({ formData, setFormData }: StepComponentProps) {
 
       <Input
         label="Registered Name"
+        placeholder="Marble Fishing LLC"
         value={formData.registeredName}
         onChange={(e) =>
           setFormData({ ...formData, registeredName: e.target.value })

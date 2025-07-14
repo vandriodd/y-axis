@@ -3,6 +3,7 @@ import StepOne from "../components/step-1";
 import StepTwo from "../components/step-2";
 import StepThree from "../components/step-3";
 import StepFour from "../components/step-4";
+import FinalStep from "@/components/final-step";
 
 export interface FormData {
   tradeName: string;
@@ -12,7 +13,7 @@ export interface FormData {
   businessRegistrationNo: string;
   ein: string;
   vatRegistrationNo: string;
-  dateOfIncorporation: string;
+  dateOfIncorporation: Date | undefined;
   postalAddress: string;
   shipmentAddress: string;
   portOfShipment: string;
@@ -23,10 +24,14 @@ export interface FormData {
   secondName: string;
   secondEmail: string;
 
+  username?: string;
+  password?: string;
+
   isStep1Valid?: boolean;
   isStep2Valid?: boolean;
   isStep3Valid?: boolean;
   isStep4Valid?: boolean;
+  isStep5Valid?: boolean;
 }
 
 export interface StepComponentProps {
@@ -56,6 +61,11 @@ export const STEPS = [
     step: 4,
     title: "Contact Persons",
     component: StepFour as StepComponent,
+  },
+  {
+    step: 5,
+    title: "Your account",
+    component: FinalStep as StepComponent,
   },
 ];
 

@@ -1,6 +1,7 @@
+import type { Dispatch, SetStateAction } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { STEPS, type FormData } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
-import type { Dispatch, SetStateAction } from "react";
 
 interface OnboardingFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -30,9 +31,10 @@ export default function OnboardingForm({
           <Button
             type="button"
             className="font-medium"
-            size="sm"
+            size="md"
             onClick={onBack}
           >
+            <Icon icon="heroicons-solid:chevron-left" />
             Previous
           </Button>
         )}
@@ -42,11 +44,11 @@ export default function OnboardingForm({
           size="md"
           className="font-medium ml-auto"
           disabled={
-            step === STEPS.length - 1 ||
             !formData[`isStep${step + 1}Valid` as keyof typeof formData]
           }
         >
-          {step === STEPS.length - 1 ? "Submit" : "Next"}
+          Next
+          <Icon icon="heroicons-solid:chevron-right" />
         </Button>
       </div>
     </form>
