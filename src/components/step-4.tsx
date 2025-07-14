@@ -6,7 +6,7 @@ export default function StepFour({
   setFormData,
 }: StepComponentProps) {
   return (
-    <div className="space-y-4">
+    <>
       <Input
         label="First Name"
         value={formData.firstName}
@@ -38,6 +38,6 @@ export default function StepFour({
           setFormData({ ...formData, secondEmail: e.target.value })
         }
       />
-    </div>
+    </>
   );
 }

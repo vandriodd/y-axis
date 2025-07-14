@@ -3,7 +3,7 @@ import { Input } from "./ui/input";
 
 export default function StepTwo({ formData, setFormData }: StepComponentProps) {
   return (
-    <div className="space-y-4">
+    <>
       <Input
         label="Business Registration Number"
         value={formData.businessRegistrationNo || ""}
@@ -33,6 +33,6 @@ export default function StepTwo({ formData, setFormData }: StepComponentProps) {
           setFormData({ ...formData, dateOfIncorporation: e.target.value })
         }
       />
-    </div>
+    </>
   );
 }

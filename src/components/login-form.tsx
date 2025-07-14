@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Icon } from "@iconify/react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -175,15 +175,15 @@ export default function LoginForm() {
         <div className="flex-grow h-px bg-gold/70"></div>
       </div>
 
-      <section className="text-center md:text-left">
+      <section className="text-center lg:text-left">
         <small className="text-gold">
           Don't have an account?{" "}
-          <a
-            href="#"
+          <Link
+            href="/onboarding"
             className="font-semibold underline hover:text-gold/80 transition-colors"
           >
             Sign up
-          </a>
+          </Link>
         </small>
       </section>
     </>

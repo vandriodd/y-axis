@@ -6,7 +6,7 @@ export default function StepThree({
   setFormData,
 }: StepComponentProps) {
   return (
-    <div className="space-y-4">
+    <>
       <Input
         label="Postal Address"
         value={formData.postalAddress || ""}
@@ -42,6 +42,6 @@ export default function StepThree({
         value={formData.phoneNo || ""}
         onChange={(e) => setFormData({ ...formData, phoneNo: e.target.value })}
       />
-    </div>
+    </>
   );
 }

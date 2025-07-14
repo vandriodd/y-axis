@@ -21,19 +21,31 @@ export default function OnboardingForm({
 
   return (
     <form onSubmit={onSubmit} className="grid gap-y-4">
-      <StepComponent formData={formData} setFormData={setFormData} />
+      <div className="flex flex-col gap-4">
+        <StepComponent formData={formData} setFormData={setFormData} />
+      </div>
 
       <div className="flex justify-between mt-6">
+        {step !== 0 && (
+          <Button
+            type="button"
+            className="font-medium"
+            size="sm"
+            onClick={onBack}
+          >
+            Previous
+          </Button>
+        )}
+
         <Button
-          type="button"
-          className="font-medium"
-          size="sm"
-          onClick={onBack}
-          disabled={step === 0}
+          type="submit"
+          size="md"
+          className="font-medium ml-auto"
+          disabled={
+            step === STEPS.length - 1 ||
+            !formData[`isStep${step + 1}Valid` as keyof typeof formData]
+          }
         >
-          Previous
-        </Button>
-        <Button type="submit" size="sm" className="font-medium">
           {step === STEPS.length - 1 ? "Submit" : "Next"}
         </Button>
       </div>

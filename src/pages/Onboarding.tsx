@@ -25,6 +25,11 @@ export default function Onboarding() {
     firstEmail: "",
     secondName: "",
     secondEmail: "",
+
+    isStep1Valid: false,
+    isStep2Valid: false,
+    isStep3Valid: false,
+    isStep4Valid: false,
   });
 
   const handleBack = () => {
@@ -43,24 +48,24 @@ export default function Onboarding() {
   };
 
   return (
-    <section className="relative min-h-screen">
-      <div className="absolute top-6 left-6 z-20">
-        <h1 className="font-garamond text-2xl font-semibold text-white">
+    <main className="relative min-h-screen">
+      <header className="absolute top-6 left-6 z-20">
+        <h2 className="font-garamond text-2xl font-semibold text-white">
           Y-Axis
-        </h1>
-      </div>
+        </h2>
+      </header>
 
-      <div className="lg:hidden min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 relative bg-[url('/login.jpg')] bg-cover bg-center">
+      <section className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 relative bg-[url('/login.jpg')] bg-cover bg-center">
         <div className="absolute inset-0 bg-black/40"></div>
 
-        <div className="z-10 w-full max-w-sm bg-bg-primary shadow-xl p-6 sm:p-8 opacity-95">
+        <div className="z-10 w-full max-w-md bg-bg-primary shadow-xl p-6 sm:p-8">
           <div className="flex justify-between items-center mb-6">
             <button
               onClick={() => setLocation("/")}
               className="flex items-center text-sm font-medium text-primary hover:text-primary/80 hover:cursor-pointer"
             >
               <Icon icon="heroicons-solid:chevron-left" />
-              Go Back
+              Return to Landing
             </button>
             <div className="text-right">
               <p className="text-xs font-semibold uppercase text-primary tracking-wider">
@@ -70,7 +75,7 @@ export default function Onboarding() {
           </div>
 
           <header className="mb-6">
-            <h1 className="font-garamond text-2xl font-bold text-accent-foreground text-center">
+            <h1 className="font-garamond text-3xl font-bold text-accent text-center">
               {STEPS[step].title}
             </h1>
           </header>
@@ -83,46 +88,7 @@ export default function Onboarding() {
             setFormData={setFormData}
           />
         </div>
-      </div>
-
-      <div className="hidden lg:flex min-h-screen w-full">
-        <div className="w-1/2 relative bg-[url('/login.jpg')] bg-cover bg-center"></div>
-
-        <div className="w-1/2 relative">
-          <div className="absolute top-8 left-8 right-8 flex justify-between items-center">
-            <button
-              onClick={() => setLocation("/")}
-              className="flex items-center text-sm font-medium text-primary hover:text-primary/80 hover:cursor-pointer"
-            >
-              <Icon icon="heroicons-solid:chevron-left" />
-              Go Back
-            </button>
-            <div className="text-right">
-              <p className="text-sm font-semibold uppercase text-primary tracking-wider">
-                STEP 0{step + 1}/0{STEPS.length}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center h-full p-8 lg:p-16 pt-24">
-            <div className="max-w-xl w-full">
-              <header className="mb-6">
-                <h1 className="font-garamond text-4xl font-bold text-accent-foreground text-center">
-                  {STEPS[step].title}
-                </h1>
-              </header>
-
-              <OnboardingForm
-                onSubmit={handleSubmit}
-                onBack={handleBack}
-                step={step}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }

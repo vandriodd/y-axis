@@ -22,6 +22,11 @@ export interface FormData {
   firstEmail: string;
   secondName: string;
   secondEmail: string;
+
+  isStep1Valid?: boolean;
+  isStep2Valid?: boolean;
+  isStep3Valid?: boolean;
+  isStep4Valid?: boolean;
 }
 
 export interface StepComponentProps {
